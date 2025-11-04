@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Carrusel de Desayunos</title>
+        <link rel="stylesheet" href="css/styles_desayunos.css" />
+        <script src="js/main_desayunos.js" defer></script>
+    </head>
     <body>
         <h1 id="categoria">Categoria</h1>
         <section id="container-productos">
             <div id="producto">
-                <img src="https://clientes.tecnoactive.cl/cms/Retail/MenuboardBonmestre/Img/Producto1.png" alt="Producto 1" />
+                <img
+                    src="https://clientes.tecnoactive.cl/cms/Retail/MenuboardBonmestre/Img/Producto1.png"
+                    alt="Producto 1" />
                 <h2>Producto 1</h2>
                 <p id="descripcion">Descripción del Producto 1</p>
                 <p id="precio">$Precio 1</p>
             </div>
             <div id="producto">
-                <img src="https://clientes.tecnoactive.cl/cms/Retail/MenuboardBonmestre/Img/Producto2.png" alt="Producto " />
+                <img
+                    src="https://clientes.tecnoactive.cl/cms/Retail/MenuboardBonmestre/Img/Producto2.png"
+                    alt="Producto " />
                 <h2>Producto 2</h2>
                 <p id="descripcion">Descripción del Producto 2</p>
                 <p id="precio">$Precio 2</p>
@@ -18,242 +29,3 @@
         </section>
     </body>
 </html>
-
-<style>
-:root{
-  --font-menu: "Hoefler Text", "Times New Roman", Times, Georgia, serif;
-  --font-sans: "Avenir Next", Avenir, "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
-  --verde:#3D5B58;
-  --verde-osc:#2F4B46;
-  --crema:#E5E1E6;
-  --titulo:#E5E1E6;
-  --desc:#E5E1E6;
-  --precio:#E5E1E6;
-  --container-max: 1400px;
-  --card-w: clamp(300px, 42vw, 520px);
-  --img-scale: .70;
-  --content-w: calc(var(--card-w) * var(--img-scale));
-  --gutter: 14px;
-  --deco-left:  url("img/elementos-varios/deco-header1.png");
-  --deco-right: url("img/elementos-varios/deco-header2.png");
-  --logo-url: url("img/elementos-varios/logo-sin-margen.png");
-  --logo-w: clamp(140px, 18vw, 240px);
-  --logo-pad: clamp(12px, 2.6vw, 26px);
-}
-
-*{box-sizing:border-box}
-html,body{margin:0;padding:0}
-img{display:block;max-width:100%}
-
-body{
-  background:var(--verde);
-  color:#1B1D1E;
-  font-family:var(--font-sans);
-}
-
-body::before{
-  content:"";
-  position:fixed; inset:0 0 auto 0; height:120px;
-  background:var(--crema);
-  z-index:10; pointer-events:none;
-  box-shadow:0 16px 46px rgba(0,0,0,.48);
-}
-
-body::after{
-  content:"MENÚ";
-  position:fixed; inset:18px 0 auto 0;
-  text-align:center;
-  font-family:var(--font-menu);
-  letter-spacing:.06em; text-transform:uppercase;
-  font-size:clamp(36px,5.2vw,72px);
-  color:var(--verde-osc);
-  z-index:30; pointer-events:none;
-}
-
-html::before,html::after{
-  content:"";
-  position:fixed; top:0; height:120px;
-  width:clamp(180px,28vw,520px);
-  background-repeat:no-repeat;
-  background-size:auto 120px;
-  z-index:20; pointer-events:none;
-}
-
-html::before{left:0;  background-image:var(--deco-left);  background-position:left top;}
-html::after {right:0; background-image:var(--deco-right); background-position:right top;}
-
-h1#categoria{
-  margin:156px 0 22px;
-  text-align:center;
-  font-weight:400;
-  text-transform:uppercase;
-  letter-spacing:.14em;
-  font-size:clamp(26px,3.2vw,39px);
-  color:#DFE7E4;
-  line-height:1.12;
-}
-
-#container-productos{
-  max-width:var(--container-max);
-  margin:0 auto 100px;
-  padding:0 32px 88px;
-  display:grid;
-  grid-template-columns:repeat(2, var(--content-w));
-  column-gap:200px;
-  row-gap:52px;
-  justify-content:center;
-  align-content:start;
-  position:relative;
-}
-
-#container-productos > div{
-  width:var(--content-w);
-  display:grid;
-  grid-template-rows:auto auto auto auto;
-  row-gap:10px;
-  align-items:start;
-  justify-items:start;
-  opacity:0;
-  animation:fadeInUp .6s ease forwards;
-}
-
-@keyframes fadeInUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-#container-productos > div > *{ margin-left:var(--gutter); }
-
-#container-productos > div > img{
-  width:var(--content-w);
-  height:auto;
-  border-radius:26px;
-  box-shadow:0 26px 58px rgba(0,0,0,.24);
-  object-fit:contain;
-  justify-self:start;
-  margin:0; padding:0; border:0; background:transparent;
-}
-
-#container-productos > div > h2{
-  width:var(--content-w);
-  margin:12px 0 0;
-  font-weight:400;
-  font-size:clamp(24px,2.6vw,32px);
-  line-height:1.28;
-  color:var(--titulo);
-}
-
-#container-productos > div > h2::after{
-  content:"";
-  display:block;
-  height:3px;
-  width:100%;
-  border-radius:3px;
-  background:linear-gradient(90deg, rgba(255,215,160,.88), rgba(168,140,84,.98));
-  margin:10px 0 10px;
-  opacity:.95;
-}
-
-#container-productos > div > p:nth-of-type(1){
-  width:var(--content-w);
-  font-size:18px;
-  line-height:1.6;
-  color:var(--desc);
-  margin:2px 0 6px;
-}
-
-#container-productos > div > p:nth-of-type(2){
-  width:var(--content-w);
-  font-size:22px;
-  font-weight:700;
-  color:var(--precio);
-  margin:4px 0 0;
-}
-
-@media (hover:hover){
-  #container-productos > div:hover{transform:translateY(-2px)}
-}
-
-#container-productos::after{
-  content:"";
-  position:fixed;
-  right:var(--logo-pad);
-  bottom:var(--logo-pad);
-  width:var(--logo-w);
-  aspect-ratio:5.2/1;
-  background-image:var(--logo-url);
-  background-repeat:no-repeat;
-  background-size:contain;
-  pointer-events:none;
-  z-index:40;
-}
-</style>
-
-<script type="module">
-    try {
-        async function obtenerPlatos() {
-            const response = await fetch("./data/platos.json")
-            if (!response.ok) {
-                throw new Error("Error al cargar el archivo JSON")
-            }
-            return await response.json()
-        }
-
-        function obtenerCategorias(platos) {
-            return Object.keys(platos)
-        }
-
-        function mostrarProductosDeCategoria(categoria, platos, productoIndex, productosPorPagina) {
-            const container = document.getElementById("container-productos")
-            const titulo = document.getElementById("categoria")
-            titulo.textContent = categoria
-
-            const productosCategoria = platos[categoria]
-            const productosAMostrar = productosCategoria.slice(productoIndex, productoIndex + productosPorPagina)
-
-            container.innerHTML = productosAMostrar
-                .map(
-                    (p) => `
-            <div id="producto">
-                <img src="${p.img || ""}" alt="${p.alt || p.nombre || ""}" />
-                <h2>${p.nombre || "Sin nombre"}</h2>
-                <p id="descripcion">${p.descripcion || ""}</p>
-                <p id="precio">${p.precio ? "$" + p.precio : ""}</p>
-            </div>
-        `
-                )
-                .join("")
-        }
-
-        function iniciarCarruselCategorias(categorias, platos, productosPorPagina = 2) {
-            let categoriaIndex = 0
-            let productoIndex = 0
-
-            function mostrarSiguiente() {
-                const categoriaActual = categorias[categoriaIndex]
-                const productosCategoria = platos[categoriaActual]
-
-                mostrarProductosDeCategoria(categoriaActual, platos, productoIndex, productosPorPagina)
-
-                productoIndex += productosPorPagina
-                if (productoIndex >= productosCategoria.length) {
-                    productoIndex = 0
-                    categoriaIndex = (categoriaIndex + 1) % categorias.length
-                }
-            }
-
-            mostrarSiguiente()
-            setInterval(mostrarSiguiente, 5000)
-        }
-
-        ;(async () => {
-            try {
-                const platos = await obtenerPlatos()
-                console.log(platos)
-                const categorias = obtenerCategorias(platos)
-                iniciarCarruselCategorias(categorias, platos, 2)
-            } catch (error) {
-                console.error("Error al iniciar el carrusel:", error)
-            }
-        })()
-    } catch (error) {
-        console.error("Error al verificar usuario:", error)
-    }
-</script>
