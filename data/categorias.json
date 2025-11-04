@@ -1,0 +1,67 @@
+[
+    {
+        "id": 1,
+        "nombre": "Desayuno y Tostadas",
+        "key": "desayunoytostadas-tab"
+    },
+    {
+        "id": 2,
+        "nombre": "Brunches",
+        "key": "brunches-tab"
+    },
+    {
+        "id": 3,
+        "nombre": "Sándwiches",
+        "key": "sandwiches-tab"
+    },
+    {
+        "id": 4,
+        "nombre": "Platos de Fondo",
+        "key": "platosdefondo-tab"
+    },
+    {
+        "id": 5,
+        "nombre": "Platos Sugeridos",
+        "key": "platossugeridos-tab"
+    },
+    {
+        "id": 6,
+        "nombre": "Plato del Día",
+        "key": "platodeldia-tab"
+    },
+    {
+        "id": 7,
+        "nombre": "Trattoria",
+        "key": "trattoria-tab"
+    },
+    {
+        "id": 8,
+        "nombre": "Hamburguesas",
+        "key": "hamburguesas-tab"
+    },
+    {
+        "id": 9,
+        "nombre": "Ensaladas",
+        "key": "ensaladas-tab"
+    },
+    {
+        "id": 10,
+        "nombre": "Postres",
+        "key": "postres-tab"
+    },
+    {
+        "id": 11,
+        "nombre": "Bebestibles",
+        "key": "bebestibles-tab"
+    },
+    {
+        "id": 12,
+        "nombre": "Pasteleria",
+        "key": "pasteleria-tab"
+    },
+    {
+        "id": 13,
+        "nombre": "Cafeteria",
+        "key": "cafeteria-tab"
+    }
+]

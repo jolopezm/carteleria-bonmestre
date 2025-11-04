@@ -1,0 +1,806 @@
+{
+    "Desayuno y Tostadas": [
+        {
+            "nombre": "Omelette Jamón Queso",
+            "img": "img/categorias/desayunoytostadas/omelette-jamon-queso.webp",
+            "alt": "Omelette Jamón Queso",
+            "descripcion": "Omelette relleno de jamón y queso, acompañado de pan tostado.",
+            "precio": 6590,
+            "key": "p01"
+        },
+        {
+            "nombre": "Omelette de Verduras",
+            "img": "img/categorias/desayunoytostadas/omelette-verduras.webp",
+            "alt": "Omelette de Verduras",
+            "descripcion": "Omelette de verduras frescas, acompañado de pan tostado.",
+            "precio": 6590,
+            "key": "p02"
+        },
+        {
+            "nombre": "Tostadas Francesas",
+            "img": "img/categorias/desayunoytostadas/tostadas-francesas.webp",
+            "alt": "Tostadas Francesas",
+            "descripcion": "Tostadas dulces con frutas frescas, azúcar flor y miel natural.",
+            "precio": 6590,
+            "key": "p03"
+        },
+        {
+            "nombre": "Tostadas Palta",
+            "img": "img/categorias/desayunoytostadas/tostadas-palta.webp",
+            "alt": "Tostadas Palta",
+            "descripcion": "Palta laminada, decorada con tomate cherry y brotes de alfalfa.",
+            "precio": 6590,
+            "key": "p04"
+        },
+        {
+            "nombre": "Tostadas Palta Huevo",
+            "img": "img/categorias/desayunoytostadas/tostadas-palta-huevo.webp",
+            "alt": "Tostadas Palta Huevo",
+            "descripcion": "Palta molida, terminadas con huevos revueltos y ciboulette.",
+            "precio": 6650,
+            "key": "p05"
+        },
+        {
+            "nombre": "Tostadas del Huerto",
+            "img": "img/categorias/desayunoytostadas/tostadas-del-huerto.webp",
+            "alt": "Tostadas del Huerto",
+            "descripcion": "Palta molida, quesillo, tomate cherry y ciboulette.",
+            "precio": 6650,
+            "key": "p06"
+        },
+        {
+            "nombre": "Croissant",
+            "img": "img/categorias/desayunoytostadas/croissant.webp",
+            "alt": "Croissant",
+            "descripcion": "Croissant con jamón y queso.",
+            "precio": 6900,
+            "key": "p07"
+        },
+        {
+            "nombre": "Croissant Nutella",
+            "img": "img/categorias/desayunoytostadas/croissant-nutella.webp",
+            "alt": "Croissant Nutella",
+            "descripcion": "Croissant relleno con Nutella y frutillas frescas.",
+            "precio": 6990,
+            "key": "p08"
+        },
+        {
+            "nombre": "Tostadas Salmón",
+            "img": "img/categorias/desayunoytostadas/tostadas-salmon-ahumado.webp",
+            "alt": "Tostadas Salmón",
+            "descripcion": "Untadas con queso philadelphia, láminas de salmón ahumado, tomate cherry y brotes.",
+            "precio": 8190,
+            "key": "p09"
+        }
+    ],
+    "brunches": [
+        {
+            "nombre": "Bowl Alegría",
+            "img": "img/categorias/brunches/bowl-alegria.webp",
+            "alt": "bowl-alegria",
+            "descripcion": "Yogurt natural, granola, mix de berries y miel.",
+            "precio": 7150,
+            "key": "p10"
+        },
+        {
+            "nombre": "Campestre Revuelto",
+            "img": "img/categorias/brunches/campestre-revuelto.webp",
+            "alt": "campestre-revuelto",
+            "descripcion": "Tostadas con huevos revueltos, tocino y palta.",
+            "precio": 11000,
+            "key": "p11"
+        },
+        {
+            "nombre": "Campestre Croissant",
+            "img": "img/categorias/brunches/campestre-croissant.webp",
+            "alt": "campestre-croissant",
+            "descripcion": "Croissant con jamón, queso, lechuga y tomate.",
+            "precio": 11650,
+            "key": "p12"
+        },
+        {
+            "nombre": "Paila Rústica",
+            "img": "img/categorias/brunches/paila-rustica.webp",
+            "alt": "paila-rustica",
+            "descripcion": "Paila de huevos de campo con chorizo artesanal y papas salteadas.",
+            "precio": 15350,
+            "key": "p13"
+        },
+        {
+            "nombre": "Desayuno Bonmestre",
+            "img": "img/categorias/brunches/desayuno-bonmestre.webp",
+            "alt": "desayuno-bonmestre",
+            "descripcion": "Selección de bollería, jamón serrano, quesos, fruta de la estación y jugo natural.",
+            "precio": 15350,
+            "key": "p14"
+        },
+        {
+            "nombre": "Tostadas Silvestre",
+            "img": "img/categorias/brunches/tostadas-silvestre.webp",
+            "alt": "tostadas-silvestre",
+            "descripcion": "Tostadas con champiñones salteados, queso de cabra y rúcula.",
+            "precio": 17400,
+            "key": "p15"
+        }
+    ],
+    "sandwiches": [
+        {
+            "nombre": "Ave Palta",
+            "img": "img/categorias/sandwiches/ave-palta.webp",
+            "alt": "ave-palta",
+            "descripcion": "Sándwich de pechuga de ave desmenuzada y palta.",
+            "precio": 6750,
+            "key": "p16"
+        },
+        {
+            "nombre": "Ave Pimentón",
+            "img": "img/categorias/sandwiches/ave-pimenton.webp",
+            "alt": "ave-pimenton",
+            "descripcion": "Sándwich de pechuga de ave desmenuzada y pimentón.",
+            "precio": 6750,
+            "key": "p17"
+        },
+        {
+            "nombre": "Barros Jarpa",
+            "img": "img/categorias/sandwiches/barros-jarpa.webp",
+            "alt": "barros-jarpa",
+            "descripcion": "Clásico sándwich de jamón y queso caliente.",
+            "precio": 6750,
+            "key": "p18"
+        },
+        {
+            "nombre": "Barros Luco",
+            "img": "img/categorias/sandwiches/barros-luco.webp",
+            "alt": "barros-luco",
+            "descripcion": "Tradicional sándwich de carne de vacuno y queso derretido.",
+            "precio": 7790,
+            "key": "p19"
+        },
+        {
+            "nombre": "Chacarero",
+            "img": "img/categorias/sandwiches/chacarero.webp",
+            "alt": "chacarero",
+            "descripcion": "Carne de vacuno, tomate, porotos verdes y ají verde.",
+            "precio": 9100,
+            "key": "p20"
+        },
+        {
+            "nombre": "Italiano",
+            "img": "img/categorias/sandwiches/italiano.webp",
+            "alt": "italiano",
+            "descripcion": "Carne de vacuno, tomate, palta y mayonesa.",
+            "precio": 9100,
+            "key": "p21"
+        },
+        {
+            "nombre": "Mechada Italiana",
+            "img": "img/categorias/sandwiches/mechada-italiana.webp",
+            "alt": "mechada-italiana",
+            "descripcion": "Carne mechada con palta, tomate y mayonesa.",
+            "precio": 10090,
+            "key": "p22"
+        }
+    ],
+    "platosdefondo": [
+        {
+            "nombre": "Pechuga de Pollo a la Plancha",
+            "img": "img/categorias/platosdefondo/pechuga-de-pollo-a-la-plancha.webp",
+            "alt": "pechuga-de-pollo-a-la-plancha",
+            "descripcion": "Acompañada de ensalada surtida o papas fritas.",
+            "precio": 11490,
+            "key": "p16"
+        },
+        {
+            "nombre": "Lomo de Vacuno a la Plancha",
+            "img": "img/categorias/platosdefondo/lomo-de-vacuno-a-la-plancha.webp",
+            "alt": "lomo-de-vacuno-a-la-plancha",
+            "descripcion": "Acompañado de arroz o puré de papas.",
+            "precio": 12490,
+            "key": "p17"
+        },
+        {
+            "nombre": "Filete de Salmón a la Plancha",
+            "img": "img/categorias/platosdefondo/filete-de-salmon-a-la-plancha.webp",
+            "alt": "filete-de-salmon-a-la-plancha",
+            "descripcion": "Con salsa de alcaparras y vegetales salteados.",
+            "precio": 12490,
+            "key": "p18"
+        },
+        {
+            "nombre": "Plateada a la Cacerola",
+            "img": "img/categorias/platosdefondo/plateada-a-la-cacerola.webp",
+            "alt": "plateada-a-la-cacerola",
+            "descripcion": "Cocción lenta al vino tinto, acompañada de pastelera de choclo.",
+            "precio": 12990,
+            "key": "p19"
+        },
+        {
+            "nombre": "Atún a la Plancha",
+            "img": "img/categorias/platosdefondo/atun-a-la-plancha.webp",
+            "alt": "atun-a-la-plancha",
+            "descripcion": "Sellado a la inglesa con sésamo y quinoa.",
+            "precio": 13990,
+            "key": "p20"
+        }
+    ],
+    "platossugeridos": [
+        {
+            "nombre": "Salmon a la plancha con ensalada del huerto",
+            "img": "img/categorias/platossugeridos/salmon-a-la-plancha-con-ensalada-del-huerto.webp",
+            "alt": "salmon-a-la-plancha-con-ensalada-del-huerto",
+            "descripcion": "Salmón dorado con ensalada fresca de huerto, colorida y saludable.",
+            "precio": 15990,
+            "key": "p16"
+        },
+        {
+            "nombre": "Atún con rissotto al pesto",
+            "img": "img/categorias/platossugeridos/atun-con-rissoto-al-pesto.webp",
+            "alt": "atun-con-rissoto-al-pesto",
+            "descripcion": "Atún sellado sobre risotto cremoso al pesto, sabor intenso.",
+            "precio": 14990,
+            "key": "p17"
+        },
+        {
+            "nombre": "Plateada a la cacerola con pastelera de choclo",
+            "img": "img/categorias/platossugeridos/plateada-a-la-cacerola-con-pastelera-de-choclo.webp",
+            "alt": "plateada-a-la-cacerola-con-pastelera-de-choclo",
+            "descripcion": "Plateada tierna con pastelera de choclo cremosa, sabor casero.",
+            "precio": 13990,
+            "key": "p18"
+        },
+        {
+            "nombre": "Pechuga de pollo a la plancha con ensalada del huerto",
+            "img": "img/categorias/platossugeridos/pechuga-de-pollo-a-la-plancha-con-ensalada-del-huerto.webp",
+            "alt": "pechuga-de-pollo-a-la-plancha-con-ensalada-del-huerto",
+            "descripcion": "Pechuga jugosa con ensalada fresca, ideal para una comida ligera.",
+            "precio": 12990,
+            "key": "p19"
+        },
+        {
+            "nombre": "Lomo de vacuno a la placha con rissoto al pesto",
+            "img": "img/categorias/platossugeridos/lomo-de-vacuno-a-la-placha-con-rissoto-al-pesto.webp",
+            "alt": "lomo-de-vacuno-a-la-placha-con-rissoto-al-pesto",
+            "descripcion": "Lomo de vacuno sellado, acompañado de cremoso risotto al pesto.",
+            "precio": 13990,
+            "key": "p20"
+        }
+    ],
+    "platodeldia": [
+        {
+            "nombre": "Plato del día",
+            "img": "img/categorias/platodeldia/plato-del-dia.webp",
+            "alt": "platodeldia",
+            "descripcion": "Consulta por el plato del día, disponible de lunes a viernes.",
+            "precio": 6750,
+            "key": "p16"
+        }
+    ],
+    "trattoria": [
+        {
+            "nombre": "Fetuccini con plateada a la cacerola",
+            "img": "img/categorias/trattoria/fetuccini-con-plateada-a-la-cacerola.webp",
+            "alt": "fetuccini-con-plateada-a-la-cacerola",
+            "descripcion": "Fetuccini con plateada desmenuzada, salsa casera y toque de albahaca.",
+            "precio": 12990,
+            "key": "p16"
+        },
+        {
+            "nombre": "Fetuccini al pesto",
+            "img": "img/categorias/trattoria/fetuccini-al-pesto.webp",
+            "alt": "fetuccini-al-pesto",
+            "descripcion": "Fetuccini al dente con salsa pesto cremosa y albahaca fresca.",
+            "precio": 11990,
+            "key": "p17"
+        },
+        {
+            "nombre": "Ñoqui al pesto",
+            "img": "img/categorias/trattoria/noqui-al-pesto.webp",
+            "alt": "noqui-al-pesto",
+            "descripcion": "Ñoquis suaves de papa con pesto cremoso y albahaca fresca.",
+            "precio": 11990,
+            "key": "p18"
+        },
+        {
+            "nombre": "Ñoqui con plateada a la cacerola",
+            "img": "img/categorias/trattoria/noqui-con-plateada-a-la-cacerola.webp",
+            "alt": "noqui-con-plateada-a-la-cacerola",
+            "descripcion": "Ñoquis suaves con plateada desmenuzada, queso rallado y albahaca fresca.",
+            "precio": 12990,
+            "key": "p19"
+        },
+        {
+            "nombre": "Rissotto camarones",
+            "img": "img/categorias/trattoria/risotto-camarones.webp",
+            "alt": "risotto-camarones",
+            "descripcion": "Risotto cremoso con camarones salteados, vegetales y suave toque cítrico.",
+            "precio": 10990,
+            "key": "p20"
+        },
+        {
+            "nombre": "Lasagna",
+            "img": "img/categorias/trattoria/lasagna.webp",
+            "alt": "lasagna",
+            "descripcion": "Capas de pasta con carne, salsa de tomate y queso gratinado.",
+            "precio": 10990,
+            "key": "p21"
+        }
+    ],
+    "hamburguesas": [
+        {
+            "nombre": "De origen",
+            "img": "img/categorias/hamburguesas/de-origen-not-burger.webp",
+            "alt": "de-origen-not-burger",
+            "descripcion": "NotBurger vegetal con cheddar vegano, palta, NotMayo y vegetales frescos.",
+            "precio": 12290,
+            "key": "p16"
+        },
+        {
+            "nombre": "De la casa",
+            "img": "img/categorias/hamburguesas/de-la-casa.webp",
+            "alt": "de-la-casa",
+            "descripcion": "Hamburguesa de res con bacon, queso cheddar y vegetales frescos.",
+            "precio": 11000,
+            "key": "p17"
+        },
+        {
+            "nombre": "Nativa",
+            "img": "img/categorias/hamburguesas/nativa.webp",
+            "alt": "nativa",
+            "descripcion": "Hamburguesa de res con bacon, cebolla caramelizada y salsa barbecue.",
+            "precio": 11000,
+            "key": "p18"
+        },
+        {
+            "nombre": "Italiana",
+            "img": "img/categorias/hamburguesas/Italiana.webp",
+            "alt": "Italiana",
+            "descripcion": "Hamburguesa con tomate, palta y mayonesa en pan brioche.",
+            "precio": 10250,
+            "key": "p19"
+        }
+    ],
+    "ensaladas": [
+        {
+            "nombre": "César camarón",
+            "img": "img/categorias/ensaladas/cesar-camaron.webp",
+            "alt": "cesar-camaron",
+            "descripcion": "Lechuga fresca con camarones, brotes, parmesano, crutones y aderezo César.",
+            "precio": 11790,
+            "key": "p16"
+        },
+        {
+            "nombre": "César pollo",
+            "img": "img/categorias/ensaladas/cesar-pollo.webp",
+            "alt": "cesar-pollo",
+            "descripcion": "Ensalada César con pollo grillado, brotes, parmesano y crutones integrales.",
+            "precio": 11790,
+            "key": "p17"
+        },
+        {
+            "nombre": "Ensalada fusión",
+            "img": "img/categorias/ensaladas/ensalada-fusion.webp",
+            "alt": "ensalada-fusion",
+            "descripcion": "Lechuga con palta, pepino marinado, champiñones, queso y crutones.",
+            "precio": 11790,
+            "key": "p18"
+        },
+        {
+            "nombre": "Ensalada salmón ahumado",
+            "img": "img/categorias/ensaladas/ensalada-salmon-ahumado.webp",
+            "alt": "ensalada-salmon-ahumado",
+            "descripcion": "Lechuga fresca con salmón ahumado, palta, parmesano y crutones integrales.",
+            "precio": 12300,
+            "key": "p19"
+        }
+    ],
+    "postres": [
+        {
+            "nombre": "Copa de helado",
+            "img": "img/categorias/postres/copa-de-helado.webp",
+            "alt": "copa-de-helado",
+            "descripcion": "Copa de helado surtido con frutas rojas, barquillos y crema.",
+            "precio": 15490,
+            "key": "p16"
+        },
+        {
+            "nombre": "Panqueques con manjar",
+            "img": "img/categorias/postres/panqueques-con-manjar.webp",
+            "alt": "panqueques-con-manjar",
+            "descripcion": "Panqueques rellenos con frutas, crema y dulce de leche tibio.",
+            "precio": 6050,
+            "key": "p17"
+        },
+        {
+            "nombre": "Volcán de chocolate",
+            "img": "img/categorias/postres/volcan-de-chocolate.webp",
+            "alt": "volcan-de-chocolate",
+            "descripcion": "Bizcocho tibio de chocolate, centro fundido, helado y salsa frutal.",
+            "precio": 7150,
+            "key": "p18"
+        }
+    ],
+    "bebestibles": [
+        {
+            "nombre": "Agua con gas",
+            "img": "img/categorias/bebestibles/agua-con-gas.webp",
+            "alt": "agua-con-gas",
+            "descripcion": "Agua mineral con gas, refrescante, natural y libre de sodio.",
+            "precio": 1890,
+            "key": "p16"
+        },
+        {
+            "nombre": "Agua sin gas",
+            "img": "img/categorias/bebestibles/agua-sin-gas.webp",
+            "alt": "agua-sin-gas",
+            "descripcion": "Agua mineral sin gas, refrescante, natural y libre de sodio.",
+            "precio": 1890,
+            "key": "p17"
+        },
+        {
+            "nombre": "Bebida en lata",
+            "img": "img/categorias/bebestibles/bebida-en-lata.webp",
+            "alt": "bebida-en-lata",
+            "descripcion": "Bebida en lata",
+            "precio": 2100,
+            "key": "p18"
+        },
+        {
+            "nombre": "Bebida botella",
+            "img": "img/categorias/bebestibles/bebida-botella.webp",
+            "alt": "bebida-botella",
+            "descripcion": "Bebida en bottela",
+            "precio": 2400,
+            "key": "p19"
+        },
+        {
+            "nombre": "Bebida en vaso",
+            "img": "img/categorias/bebestibles/bebida-en-vaso.webp",
+            "alt": "bebida-en-vaso",
+            "descripcion": "Bebida en vaso",
+            "precio": 1590,
+            "key": "p20"
+        },
+        {
+            "nombre": "Té frío Lipton variedades",
+            "img": "img/categorias/bebestibles/te-frio-lipton-variedades.webp",
+            "alt": "te-frio-lipton-variedades",
+            "descripcion": "Té frío Lipton variedades",
+            "precio": 1890,
+            "key": "p21"
+        },
+        {
+            "nombre": "Jugo de pulpa natural",
+            "img": "img/categorias/bebestibles/jugo-de-pulpa-natural.webp",
+            "alt": "jugo-de-pulpa-natural",
+            "descripcion": "Jugo de pulpa natural",
+            "precio": 3750,
+            "key": "p22"
+        },
+        {
+            "nombre": "Vitamina naranja",
+            "img": "img/categorias/bebestibles/vitamina-naranja.webp",
+            "alt": "vitamina-naranja",
+            "descripcion": "Vitamina naranja",
+            "precio": 4150,
+            "key": "p23"
+        },
+        {
+            "nombre": "Limonada menta jengibre",
+            "img": "img/categorias/bebestibles/limonada-menta-jengibre.webp",
+            "alt": "limonada-menta-jengibre",
+            "descripcion": "Limonada menta jengibre",
+            "precio": 4150,
+            "key": "p24"
+        }
+    ],
+    "pasteleria": [
+        {
+            "nombre": "Media luna tradicional",
+            "img": "img/categorias/pasteleriayhorneados/media-luna-tradicional.webp",
+            "alt": "media-luna-tradicional",
+            "descripcion": "Media luna tradicional",
+            "precio": 1350,
+            "key": "p16"
+        },
+        {
+            "nombre": "Media luna rellena con manjar",
+            "img": "img/categorias/pasteleriayhorneados/media-luna-rellena-con-manjar.webp",
+            "alt": "media-luna-rellena-con-manjar",
+            "descripcion": "Media luna rellena con manjar",
+            "precio": 1690,
+            "key": "p17"
+        },
+        {
+            "nombre": "Top variedades",
+            "img": "img/categorias/pasteleriayhorneados/top-variedades.webp",
+            "alt": "top-variedades",
+            "descripcion": "Top variedades",
+            "precio": 1990,
+            "key": "p18"
+        },
+        {
+            "nombre": "Donut",
+            "img": "img/categorias/pasteleriayhorneados/donut.webp",
+            "alt": "donut",
+            "descripcion": "Donut",
+            "precio": 2300,
+            "key": "p19"
+        },
+        {
+            "nombre": "Muffin",
+            "img": "img/categorias/pasteleriayhorneados/muffin.webp",
+            "alt": "muffin",
+            "descripcion": "Muffin",
+            "precio": 2850,
+            "key": "p20"
+        },
+        {
+            "nombre": "Muffin sin azúcar",
+            "img": "img/categorias/pasteleriayhorneados/muffin-sin-azucar.webp",
+            "alt": "muffin-sin-azucar",
+            "descripcion": "Muffin sin azúcar",
+            "precio": 2950,
+            "key": "p21"
+        },
+        {
+            "nombre": "Pie de limón",
+            "img": "img/categorias/pasteleriayhorneados/pie-de-limon.webp",
+            "alt": "pie-de-limon",
+            "descripcion": "Pie de limón",
+            "precio": 4900,
+            "key": "p22"
+        },
+        {
+            "nombre": "Kuchen",
+            "img": "img/categorias/pasteleriayhorneados/kuchen.webp",
+            "alt": "kuchen",
+            "descripcion": "Kuchen",
+            "precio": 4900,
+            "key": "p23"
+        },
+        {
+            "nombre": "Cheesecake",
+            "img": "img/categorias/pasteleriayhorneados/cheesecake.webp",
+            "alt": "cheesecake",
+            "descripcion": "Cheesecake",
+            "precio": 5050,
+            "key": "p24"
+        },
+        {
+            "nombre": "Cheesecake sin azúcar",
+            "img": "img/categorias/pasteleriayhorneados/cheesecake-sin-azucar.webp",
+            "alt": "cheesecake-sin-azucar",
+            "descripcion": "Cheesecake sin azúcar",
+            "precio": 5290,
+            "key": "p25"
+        },
+        {
+            "nombre": "Trozo de torta",
+            "img": "img/categorias/pasteleriayhorneados/trozo-de-torta.webp",
+            "alt": "trozo-de-torta",
+            "descripcion": "Trozo de torta",
+            "precio": 5050,
+            "key": "p26"
+        },
+        {
+            "nombre": "Trozo de torta sin azúcar",
+            "img": "img/categorias/pasteleriayhorneados/trozo-de-torta-sin-azucar.webp",
+            "alt": "trozo-de-torta-sin-azucar",
+            "descripcion": "Trozo de torta sin azúcar",
+            "precio": 5200,
+            "key": "p27"
+        },
+        {
+            "nombre": "Porción de galletas",
+            "img": "img/categorias/pasteleriayhorneados/porcion-de-galletas.webp",
+            "alt": "porcion-de-galletas",
+            "descripcion": "orción de galletas",
+            "precio": 2850,
+            "key": "p28"
+        },
+        {
+            "nombre": "Cuadro",
+            "img": "img/categorias/pasteleriayhorneados/cuadro.webp",
+            "alt": "cuadro",
+            "descripcion": "Cuadro",
+            "precio": 2700,
+            "key": "p29"
+        },
+        {
+            "nombre": "Rollito de canela",
+            "img": "img/categorias/pasteleriayhorneados/rollito-de-canela.webp",
+            "alt": "rollito-de-canela",
+            "descripcion": "Rollito de canela",
+            "precio": 2600,
+            "key": "p30"
+        },
+        {
+            "nombre": "Canasto",
+            "img": "img/categorias/pasteleriayhorneados/canasto.webp",
+            "alt": "canasto",
+            "descripcion": "Canasto",
+            "precio": 1450,
+            "key": "p31"
+        }
+    ],
+    "cafeteria": [
+        {
+            "nombre": "Ristretto",
+            "img": "img/categorias/cafeteria/ristretto.webp",
+            "alt": "ristretto",
+            "descripcion": "Ristretto",
+            "precio": 2850,
+            "key": "p16"
+        },
+        {
+            "nombre": "Espresso",
+            "img": "img/categorias/cafeteria/espresso.webp",
+            "alt": "espresso",
+            "descripcion": "Espresso",
+            "precio": 3050,
+            "key": "p17"
+        },
+        {
+            "nombre": "Espresso doble",
+            "img": "img/categorias/cafeteria/espresso-doble.webp",
+            "alt": "espresso-doble",
+            "descripcion": "Espresso doble",
+            "precio": 3390,
+            "key": "p18"
+        },
+        {
+            "nombre": "Americano",
+            "img": "img/categorias/cafeteria/americano.webp",
+            "alt": "americano",
+            "descripcion": "Americano",
+            "precio": 3390,
+            "key": "p19"
+        },
+        {
+            "nombre": "Capuccino",
+            "img": "img/categorias/cafeteria/capuccino.webp",
+            "alt": "capuccino",
+            "descripcion": "Capuccino",
+            "precio": 3890,
+            "key": "p20"
+        },
+        {
+            "nombre": "Cortado doble",
+            "img": "img/categorias/cafeteria/cortado-doble.webp",
+            "alt": "cortado-doble",
+            "descripcion": "Cortado doble",
+            "precio": 3690,
+            "key": "p21"
+        },
+        {
+            "nombre": "Latte",
+            "img": "img/categorias/cafeteria/latte.webp",
+            "alt": "latte",
+            "descripcion": "Latte",
+            "precio": 4290,
+            "key": "p22"
+        },
+        {
+            "nombre": "Latte sabores",
+            "img": "img/categorias/cafeteria/latte-sabores.webp",
+            "alt": "latte-sabores",
+            "descripcion": "Latte sabores",
+            "precio": 4350,
+            "key": "p23"
+        },
+        {
+            "nombre": "Chocolate caliente",
+            "img": "img/categorias/cafeteria/chocolate-caliente.webp",
+            "alt": "chocolate-caliente",
+            "descripcion": "Chocolate caliente",
+            "precio": 3350,
+            "key": "p24"
+        },
+        {
+            "nombre": "Mocaccino",
+            "img": "img/categorias/cafeteria/mocaccino.webp",
+            "alt": "mocaccino",
+            "descripcion": "Mocaccino",
+            "precio": 4350,
+            "key": "p25"
+        },
+        {
+            "nombre": "Latte alfajor",
+            "img": "img/categorias/cafeteria/latte-alfajor.webp",
+            "alt": "latte-alfajor",
+            "descripcion": "Latte alfajor",
+            "precio": 4290,
+            "key": "p26"
+        },
+        {
+            "nombre": "Latte avellana",
+            "img": "img/categorias/cafeteria/latte-avellana.webp",
+            "alt": "latte-avellana",
+            "descripcion": "Latte avellana",
+            "precio": 4700,
+            "key": "p27"
+        },
+        {
+            "nombre": "Caramel mocca",
+            "img": "img/categorias/cafeteria/caramel-mocca.webp",
+            "alt": "caramel-mocca",
+            "descripcion": "Caramel mocca",
+            "precio": 4490,
+            "key": "p28"
+        },
+        {
+            "nombre": "Almond coffe",
+            "img": "img/categorias/cafeteria/almond-coffe.webp",
+            "alt": "almond-coffe",
+            "descripcion": "Almond coffe",
+            "precio": 4490,
+            "key": "p29"
+        },
+        {
+            "nombre": "Nespresso brulée",
+            "img": "img/categorias/cafeteria/nespresso-brulee.webp",
+            "alt": "nespresso-brulee",
+            "descripcion": "Nespresso brulée",
+            "precio": 4490,
+            "key": "p30"
+        },
+        {
+            "nombre": "Leche caliente",
+            "img": "img/categorias/cafeteria/leche-caliente.webp",
+            "alt": "leche-caliente",
+            "descripcion": "Leche caliente",
+            "precio": 2300,
+            "key": "p31"
+        },
+        {
+            "nombre": "té o infusión",
+            "img": "img/categorias/cafeteria/te-o-infusion.webp",
+            "alt": "te-o-infusion",
+            "descripcion": "té o infusión",
+            "precio": 2400,
+            "key": "p32"
+        }
+    ],
+    "bebidasfrias": [
+        {
+            "nombre": "Affogato",
+            "img": "img/categorias/bebidas-frias/affogato.webp",
+            "alt": "affogato",
+            "descripcion": "Affogato",
+            "precio": 3850,
+            "key": "p16"
+        },
+        {
+            "nombre": "Freshpresso",
+            "img": "img/categorias/bebidas-frias/freshpresso.webp",
+            "alt": "freshpresso",
+            "descripcion": "Freshpresso",
+            "precio": 4600,
+            "key": "p17"
+        },
+        {
+            "nombre": "Café helado",
+            "img": "img/categorias/bebidas-frias/cafe-helado.webp",
+            "alt": "cafe-helado",
+            "descripcion": "Café helado",
+            "precio": 4800,
+            "key": "p18"
+        },
+        {
+            "nombre": "Lemon ginger iced tea",
+            "img": "img/categorias/bebidas-frias/lemon-ginger-iced-tea.webp",
+            "alt": "lemon-ginger-iced-tea",
+            "descripcion": "Lemon ginger iced tea",
+            "precio": 3750,
+            "key": "p19"
+        },
+        {
+            "nombre": "Wild berries iced tea",
+            "img": "img/categorias/bebidas-frias/wild-berries-iced-tea.webp",
+            "alt": "wild-berries-iced-tea",
+            "descripcion": "Wild berries iced tea",
+            "precio": 3750,
+            "key": "p20"
+        }
+    ]
+}
