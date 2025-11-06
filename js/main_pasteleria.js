@@ -226,6 +226,9 @@ async function inicializar(categoria = CONFIG.CATEGORIA_DEFECTO) {
 // 7. API PÚBLICA
 // --------------------------------------------
 
+// Flag para controlar la auto-inicialización
+window.__carruselPasteleriaInicializado = false;
+
 /**
  * Función pública para inicializar el carrusel con una categoría específica
  * Puedes llamar esta función desde el HTML con la categoría que quieras mostrar
@@ -241,8 +244,14 @@ async function inicializar(categoria = CONFIG.CATEGORIA_DEFECTO) {
 window.inicializarCarruselCategoria = function (
     categoria = CONFIG.CATEGORIA_DEFECTO
 ) {
+    window.__carruselPasteleriaInicializado = true;
     inicializar(categoria);
 };
 
 // Ejecutar cuando el DOM esté completamente cargado
-document.addEventListener("DOMContentLoaded", () => inicializar());
+// Solo auto-inicializa si no se ha llamado manualmente a inicializarCarruselCategoria
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.__carruselPasteleriaInicializado) {
+        inicializar();
+    }
+});

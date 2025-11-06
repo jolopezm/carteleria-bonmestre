@@ -187,6 +187,9 @@ function configurarEventosNavegacion() {
 // 7. API PÚBLICA
 // --------------------------------------------
 
+// Flag para controlar la auto-inicialización
+window.__carruselDesayunosInicializado = false;
+
 /**
  * Función pública para inicializar el carrusel con categorías específicas
  * Puedes llamar esta función desde el HTML con las categorías que quieras mostrar
@@ -200,12 +203,16 @@ function configurarEventosNavegacion() {
  * // </script>
  */
 window.inicializarCarrusel = function (categorias = null) {
+    window.__carruselDesayunosInicializado = true;
     configurarEventosNavegacion();
     inicializar(categorias);
 };
 
 // Ejecutar cuando el DOM esté completamente cargado
+// Solo auto-inicializa si no se ha llamado manualmente a inicializarCarrusel
 document.addEventListener("DOMContentLoaded", () => {
-    configurarEventosNavegacion();
-    inicializar();
+    if (!window.__carruselDesayunosInicializado) {
+        configurarEventosNavegacion();
+        inicializar();
+    }
 });
