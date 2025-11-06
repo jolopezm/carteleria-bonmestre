@@ -1,11 +1,24 @@
+// ============================================
+// CARTELERÍA BONMESTRE - DESAYUNOS/ALMUERZOS
+// ============================================
+
+// --------------------------------------------
+// 1. CONFIGURACIÓN Y CONSTANTES
+// --------------------------------------------
 const CONFIG = {
     PRODUCTOS_POR_PAGINA: 2,
     INTERVALO_CARRUSEL: 5000, // 5 segundos
+    DURACION_FADE_OUT: 500, // 0.5 segundos
+    DURACION_FADE_IN: 800, // 0.8 segundos
     RUTA_DATOS: "./data/platos.json",
     PAGINA_DESTINO: "pasteleria.html",
     // Categorías por defecto (null = mostrar todas)
     CATEGORIAS_DEFECTO: null,
 };
+
+// --------------------------------------------
+// 2. FUNCIONES DE DATOS (API)
+// --------------------------------------------
 
 /**
  * Obtiene los platos desde el archivo JSON
@@ -44,8 +57,12 @@ function obtenerCategorias(platos, categoriasFiltro = null) {
     );
 }
 
+// --------------------------------------------
+// 3. FUNCIONES DE RENDERIZADO
+// --------------------------------------------
+
 /**
- * Renderiza los productos de una categoría específica
+ * Renderiza los productos de una categoría específica con animación fade
  * @param {string} categoria - Nombre de la categoría
  * @param {Object} platos - Objeto con todas las categorías
  * @param {number} productoIndex - Índice del primer producto a mostrar
@@ -57,57 +74,75 @@ function mostrarProductosDeCategoria(
     productoIndex,
     productosPorPagina
 ) {
-    const container = document.getElementById("container-productos");
-    const titulo = document.getElementById("categoria");
+    const $container = $("#container-productos");
+    const $titulo = $("#categoria");
 
-    if (!container || !titulo) {
+    if (!$container.length || !$titulo.length) {
         console.error("No se encontraron los elementos del DOM necesarios");
         return;
     }
 
-    titulo.textContent = categoria;
-    const productosCategoria = platos[categoria] || [];
-    const productosAMostrar = productosCategoria.slice(
-        productoIndex,
-        productoIndex + productosPorPagina
-    );
+    // Fade out del contenido actual
+    $container.fadeOut(CONFIG.DURACION_FADE_OUT, function () {
+        // Actualizar título
+        $titulo.text(categoria);
 
-    container.innerHTML = productosAMostrar
-        .map(
-            (producto) => `
-            <div id="producto">
-                <img 
-                    class="producto-img" 
-                    src="${producto.img || ""}" 
-                    alt="${producto.alt || producto.nombre || ""}" 
-                    data-nombre="${producto.nombre || ""}"
-                />
-                <h2>${producto.nombre || "Sin nombre"}</h2>
-                <p id="descripcion">${producto.descripcion || ""}</p>
-                <p id="precio">${
-                    producto.precio ? "$" + producto.precio : ""
-                }</p>
-            </div>
-        `
-        )
-        .join("");
-    agregarEventosImagenes(container);
+        // Preparar productos
+        const productosCategoria = platos[categoria] || [];
+        const productosAMostrar = productosCategoria.slice(
+            productoIndex,
+            productoIndex + productosPorPagina
+        );
+
+        // Renderizar HTML
+        const html = productosAMostrar
+            .map(
+                (producto) => `
+                <div class="producto">
+                    <img 
+                        class="producto-img" 
+                        src="${producto.img || ""}" 
+                        alt="${producto.alt || producto.nombre || ""}" 
+                        data-nombre="${producto.nombre || ""}"
+                    />
+                    <h2>${producto.nombre || "Sin nombre"}</h2>
+                    <p class="descripcion">${producto.descripcion || ""}</p>
+                    <p class="precio">${
+                        producto.precio
+                            ? "$" + producto.precio.toLocaleString()
+                            : ""
+                    }</p>
+                </div>
+            `
+            )
+            .join("");
+
+        $container.html(html);
+
+        // Agregar eventos a las imágenes
+        agregarEventosImagenes();
+
+        // Fade in del nuevo contenido
+        $container.fadeIn(CONFIG.DURACION_FADE_IN);
+    });
 }
 
 /**
  * Añade event listeners a las imágenes de productos
- * @param {HTMLElement} container - Contenedor de productos
  */
-function agregarEventosImagenes(container) {
-    const imagenes = container.querySelectorAll(".producto-img");
-
-    imagenes.forEach((img) => {
-        img.style.cursor = "pointer";
-        img.addEventListener("click", () => {
-            redirigirAPasteleria();
-        });
+function agregarEventosImagenes() {
+    $(".producto-img").each(function () {
+        $(this)
+            .css("cursor", "pointer")
+            .on("click", function () {
+                redirigirAPasteleria();
+            });
     });
 }
+
+// --------------------------------------------
+// 4. FUNCIONES DE NAVEGACIÓN
+// --------------------------------------------
 
 /**
  * Redirige a la página de pastelería
@@ -116,8 +151,12 @@ function redirigirAPasteleria() {
     window.location.href = CONFIG.PAGINA_DESTINO;
 }
 
+// --------------------------------------------
+// 5. LÓGICA DEL CARRUSEL
+// --------------------------------------------
+
 /**
- * Inicializa y ejecuta el carrusel de categorías
+ * Inicializa y ejecuta el carrusel de categorías con animaciones
  * @param {Array<string>} categorias - Lista de categorías
  * @param {Object} platos - Objeto con todas las categorías y platos
  * @param {number} productosPorPagina - Cantidad de productos por vista
@@ -148,9 +187,16 @@ function iniciarCarruselCategorias(
         }
     }
 
+    // Mostrar inmediatamente el primer conjunto
     mostrarSiguiente();
+
+    // Configurar intervalo para cambios automáticos
     setInterval(mostrarSiguiente, CONFIG.INTERVALO_CARRUSEL);
 }
+
+// --------------------------------------------
+// 6. INICIALIZACIÓN
+// --------------------------------------------
 
 /**
  * Inicializa la aplicación cuando el DOM está listo

@@ -1,20 +1,41 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Ejemplo - Categoría Almuerzos</title>
+
+        <!-- jQuery debe cargarse PRIMERO -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+        <!-- Luego los scripts que dependen de jQuery -->
+        <script src="js/animaciones.js" defer></script>
         <script src="js/main_desayunos.js" defer></script>
+
+        <style>
+            @import url("css/estilos_basicos.css");
+
+            .producto {
+                transition: transform 0.3s ease;
+            }
+
+            .producto:hover {
+                transform: scale(1.02);
+            }
+        </style>
     </head>
     <body>
         <h1 id="categoria">Categoria</h1>
         <section id="container-productos"></section>
 
         <script>
-            document.addEventListener("DOMContentLoaded", () => {
+            $(document).ready(function () {
                 inicializarCarrusel([
-                    "platosdefondo",
-                    "platodeldia",
-                    "platossugeridos",
-                    "hamburguesas",
-                    "sandwiches",
+                    "Platos de Fondo",
+                    "Plato Del Día",
+                    "Platos Sugeridos",
+                    "Hamburguesas",
+                    "Sandwiches",
                 ]);
             });
         </script>
