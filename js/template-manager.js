@@ -4,7 +4,7 @@ const TEMPLATE_CONFIG = {
     TEMPLATE_DIR: "./templates/",
     INTERVALO_FRAMES: 5000,
     DURACION_FADE: 600,
-    INTERVALO_PRODUCTOS: 5000,
+    INTERVALO_PRODUCTOS: 1000,
     DURACION_FADE_PRODUCTO: 400,
     PRODUCTOS_POR_PAGINA: 6,
 };
@@ -223,6 +223,12 @@ function iniciarRotacionProductos($frame, onComplete) {
         return;
     }
 
+    $items.removeClass("active");
+    $items.eq(0).addClass("active");
+
+    const primeraImg = $items.eq(0).data("producto-img");
+    $imgDestacada.attr("src", primeraImg);
+
     let indiceActual = 0;
     let productosIterados = 1;
 
@@ -313,6 +319,7 @@ async function inicializarCarruselFrames(frames) {
 function iniciarRotacionFrames() {
     const $frames = $(".frame");
     let frameActual = 0;
+    let ciclosCompletados = 0;
 
     function avanzarFrame() {
         const $frameActual = $frames.eq(frameActual);
@@ -323,6 +330,14 @@ function iniciarRotacionFrames() {
             .slideUp(TEMPLATE_CONFIG.DURACION_FADE);
 
         frameActual = (frameActual + 1) % $frames.length;
+
+        if (frameActual === 0) {
+            ciclosCompletados++;
+
+            setTimeout(() => {
+                location.reload();
+            }, TEMPLATE_CONFIG.INTERVALO_FRAMES);
+        }
 
         const $nuevoFrame = $frames.eq(frameActual);
 
@@ -362,6 +377,7 @@ function obtenerHoraActual() {
     return ahora.toLocaleTimeString("es-CL", {
         hour: "2-digit",
         minute: "2-digit",
+        hour12: false,
     });
 }
 
