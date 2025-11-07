@@ -1,4 +1,3 @@
-// jQuery está disponible globalmente desde el CDN
 const $ = window.$;
 
 const TEMPLATE_CONFIG = {
@@ -190,7 +189,6 @@ function renderizarProductos(
 
 let intervalosActivos = [];
 let intervaloFrames = null;
-let productosCompletados = false;
 
 function limpiarIntervalos() {
     intervalosActivos.forEach((intervalo) => clearInterval(intervalo));
@@ -219,10 +217,6 @@ function iniciarRotacionProductos($frame, onComplete) {
     const $items = $menuList.find(".item");
     console.log("items:", $items);
     const $imgDestacada = $frame.find(".producto-img-destacada");
-    const totalProductos =
-        parseInt($menuList.data("total-productos")) || $items.length;
-    const productosPorPagina =
-        parseInt($menuList.data("productos-por-pagina")) || 6;
 
     if ($items.length <= 1) {
         if (onComplete) onComplete();
@@ -233,7 +227,7 @@ function iniciarRotacionProductos($frame, onComplete) {
     let productosIterados = 1;
 
     const intervalo = setInterval(() => {
-        $items.eq(indiceActual).removeClass("active");
+        $items.removeClass("active");
 
         indiceActual = (indiceActual + 1) % $items.length;
         productosIterados++;
@@ -363,14 +357,6 @@ function iniciarRotacionFrames() {
     }
 }
 
-// --------------------------------------------
-// 4. HELPERS - OBTENER HORA Y CLIMA
-// --------------------------------------------
-
-/**
- * Obtiene la hora actual formateada
- * @returns {string} Hora en formato HH:MM
- */
 function obtenerHoraActual() {
     const ahora = new Date();
     return ahora.toLocaleTimeString("es-CL", {
@@ -379,10 +365,6 @@ function obtenerHoraActual() {
     });
 }
 
-/**
- * Obtiene configuración actual (hora, temperatura)
- * @returns {Object} Configuración con hora y temperatura
- */
 function obtenerConfigActual() {
     return {
         hora: obtenerHoraActual(),
@@ -390,14 +372,6 @@ function obtenerConfigActual() {
     };
 }
 
-/**
- * Genera frames de productos paginados automáticamente
- * Si hay más de PRODUCTOS_POR_PAGINA productos, crea múltiples frames
- * @param {string} template - Nombre del template
- * @param {Array<Object>} productos - Array de productos
- * @param {Object} config - Configuración
- * @returns {Array<Object>} Array de frames de productos
- */
 function generarFramesProductosPaginados(template, productos, config = {}) {
     const productosPorPagina = TEMPLATE_CONFIG.PRODUCTOS_POR_PAGINA;
     const totalPaginas = Math.ceil(productos.length / productosPorPagina);
@@ -409,7 +383,7 @@ function generarFramesProductosPaginados(template, productos, config = {}) {
             template: template,
             data: {
                 productos: productos,
-                paginaInicial: pagina, // ✅ CORREGIDO: usar paginaInicial en lugar de productoDestacadoIndex
+                paginaInicial: pagina,
             },
             config: config,
         });
@@ -453,7 +427,6 @@ async function main() {
     await inicializarCarruselFrames(frames);
 }
 
-// Exportar funciones principales como módulos ES6
 export {
     inicializarCarruselFrames,
     cargarTemplate,
