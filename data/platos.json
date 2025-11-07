@@ -73,7 +73,7 @@
             "key": "p09"
         }
     ],
-    "brunches": [
+    "Brunches": [
         {
             "nombre": "Bowl Alegría",
             "img": "img/categorias/brunches/bowl-alegria.webp",
@@ -123,7 +123,7 @@
             "key": "p15"
         }
     ],
-    "sandwiches": [
+    "Sandwiches": [
         {
             "nombre": "Ave Palta",
             "img": "img/categorias/sandwiches/ave-palta.webp",
@@ -181,7 +181,7 @@
             "key": "p22"
         }
     ],
-    "platosdefondo": [
+    "Platos de Fondo": [
         {
             "nombre": "Pechuga de Pollo a la Plancha",
             "img": "img/categorias/platosdefondo/pechuga-de-pollo-a-la-plancha.webp",
@@ -223,7 +223,7 @@
             "key": "p20"
         }
     ],
-    "platossugeridos": [
+    "Platos Sugeridos": [
         {
             "nombre": "Salmon a la plancha con ensalada del huerto",
             "img": "img/categorias/platossugeridos/salmon-a-la-plancha-con-ensalada-del-huerto.webp",
@@ -265,7 +265,7 @@
             "key": "p20"
         }
     ],
-    "platodeldia": [
+    "Plato del Día": [
         {
             "nombre": "Plato del día",
             "img": "img/categorias/platodeldia/plato-del-dia.webp",
@@ -275,7 +275,7 @@
             "key": "p16"
         }
     ],
-    "trattoria": [
+    "Trattoria": [
         {
             "nombre": "Fetuccini con plateada a la cacerola",
             "img": "img/categorias/trattoria/fetuccini-con-plateada-a-la-cacerola.webp",
@@ -325,7 +325,7 @@
             "key": "p21"
         }
     ],
-    "hamburguesas": [
+    "Hamburguesas": [
         {
             "nombre": "De origen",
             "img": "img/categorias/hamburguesas/de-origen-not-burger.webp",
@@ -359,7 +359,7 @@
             "key": "p19"
         }
     ],
-    "ensaladas": [
+    "Ensaladas": [
         {
             "nombre": "César camarón",
             "img": "img/categorias/ensaladas/cesar-camaron.webp",
@@ -393,7 +393,7 @@
             "key": "p19"
         }
     ],
-    "postres": [
+    "Postres": [
         {
             "nombre": "Copa de helado",
             "img": "img/categorias/postres/copa-de-helado.webp",
@@ -419,7 +419,7 @@
             "key": "p18"
         }
     ],
-    "bebestibles": [
+    "Bebestibles": [
         {
             "nombre": "Agua con gas",
             "img": "img/categorias/bebestibles/agua-con-gas.webp",
@@ -493,7 +493,7 @@
             "key": "p24"
         }
     ],
-    "pasteleria": [
+    "Pastelería": [
         {
             "nombre": "Media luna tradicional",
             "img": "img/categorias/pasteleriayhorneados/media-luna-tradicional.webp",
@@ -623,7 +623,7 @@
             "key": "p31"
         }
     ],
-    "cafeteria": [
+    "Cafetería": [
         {
             "nombre": "Ristretto",
             "img": "img/categorias/cafeteria/ristretto.webp",
@@ -761,7 +761,7 @@
             "key": "p32"
         }
     ],
-    "bebidasfrias": [
+    "Bebidas Frías": [
         {
             "nombre": "Affogato",
             "img": "img/categorias/bebidas-frias/affogato.webp",

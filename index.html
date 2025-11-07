@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cartelería Auto - Bonmestre</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <link rel="stylesheet" href="css/styles-1.css" />
+    </head>
+    <body>
+        <div id="app-container"></div>
+
+        <script type="module">
+            import {
+                obtenerConfigActual,
+                generarFramesProductosPaginados,
+                inicializarCarruselFrames,
+            } from "./js/template-manager.js";
+
+            $(document).ready(async function () {
+                try {
+                    const response = await fetch("./data/platos.json");
+                    const platos = await response.json();
+                    const config = obtenerConfigActual();
+
+                    const categoriasAMostrar = [
+                        "Desayuno y Tostadas",
+                        "Cafetería",
+                        "Brunches",
+                        "Pastelería",
+                        "Platos de Fondo",
+                        "Hamburguesas",
+                    ];
+
+                    const frames = [];
+
+                    frames.push({
+                        tipo: "intro",
+                        template: "intro",
+                    });
+
+                    categoriasAMostrar.forEach((categoria) => {
+                        const productosCategoria = platos[categoria] || [];
+
+                        if (productosCategoria.length > 0) {
+                            frames.push({
+                                tipo: "categoria",
+                                template: "categoria",
+                                data: { nombre: categoria },
+                                config: config,
+                            });
+
+                            if (productosCategoria.length >= 3) {
+                                frames.push({
+                                    tipo: "destacados",
+                                    template: "destacados",
+                                    data: {
+                                        productos: productosCategoria.slice(
+                                            0,
+                                            3
+                                        ),
+                                    },
+                                    config: config,
+                                });
+                            }
+
+                            frames.push(
+                                ...generarFramesProductosPaginados(
+                                    "productos",
+                                    productosCategoria,
+                                    {
+                                        ...config,
+                                        eyebrow: `Nuestro menú de ${categoria}`,
+                                    }
+                                )
+                            );
+                        }
+                    });
+
+                    await inicializarCarruselFrames(frames);
+                } catch (error) {
+                    console.error("Error al inicializar:", error);
+                }
+            });
+        </script>
+    </body>
+</html>

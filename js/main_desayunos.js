@@ -1,101 +1,168 @@
-try {
-    async function obtenerPlatos() {
-        const response = await fetch("./data/platos.json");
+const CONFIG = {
+    PRODUCTOS_POR_PAGINA: 2,
+    INTERVALO_CARRUSEL: 5000,
+    DURACION_FADE_OUT: 500,
+    DURACION_FADE_IN: 800,
+    RUTA_DATOS: "./data/platos.json",
+    PAGINA_DESTINO: "pasteleria.html",
+    CATEGORIAS_DEFECTO: null,
+};
+
+async function obtenerPlatos() {
+    try {
+        const response = await fetch(CONFIG.RUTA_DATOS);
         if (!response.ok) {
-            throw new Error("Error al cargar el archivo JSON");
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         return await response.json();
+    } catch (error) {
+        console.error("Error al cargar el archivo JSON:", error);
+        throw error;
+    }
+}
+
+function obtenerCategorias(platos, categoriasFiltro = null) {
+    const todasLasCategorias = Object.keys(platos);
+
+    if (!categoriasFiltro || categoriasFiltro.length === 0) {
+        return todasLasCategorias;
     }
 
-    function obtenerCategorias(platos) {
-        return Object.keys(platos);
+    return categoriasFiltro.filter((categoria) =>
+        todasLasCategorias.includes(categoria)
+    );
+}
+
+function mostrarProductosDeCategoria(
+    categoria,
+    platos,
+    productoIndex,
+    productosPorPagina
+) {
+    const $container = $("#container-productos");
+    const $titulo = $("#categoria");
+
+    if (!$container.length || !$titulo.length) {
+        console.error("No se encontraron los elementos del DOM necesarios");
+        return;
     }
 
-    function mostrarProductosDeCategoria(
-        categoria,
-        platos,
-        productoIndex,
-        productosPorPagina
-    ) {
-        const container = document.getElementById("container-productos");
-        const titulo = document.getElementById("categoria");
-        titulo.textContent = categoria;
+    $container.fadeOut(CONFIG.DURACION_FADE_OUT, function () {
+        $titulo.text(categoria);
 
-        const productosCategoria = platos[categoria];
+        const productosCategoria = platos[categoria] || [];
         const productosAMostrar = productosCategoria.slice(
             productoIndex,
             productoIndex + productosPorPagina
         );
 
-        container.innerHTML = productosAMostrar
+        const html = productosAMostrar
             .map(
-                (p) => `
-            <div id="producto">
-                <img class="producto-img" src="${p.img || ""}" alt="${
-                    p.alt || p.nombre || ""
-                }" data-nombre="${p.nombre || ""}" />
-                <h2>${p.nombre || "Sin nombre"}</h2>
-                <p id="descripcion">${p.descripcion || ""}</p>
-                <p id="precio">${p.precio ? "$" + p.precio : ""}</p>
-            </div>
-        `
+                (producto) => `
+                <div class="producto">
+                    <img 
+                        class="producto-img" 
+                        src="${producto.img || ""}" 
+                        alt="${producto.alt || producto.nombre || ""}" 
+                        data-nombre="${producto.nombre || ""}"
+                    />
+                    <h2>${producto.nombre || "Sin nombre"}</h2>
+                    <p class="descripcion">${producto.descripcion || ""}</p>
+                    <p class="precio">${
+                        producto.precio
+                            ? "$" + producto.precio.toLocaleString()
+                            : ""
+                    }</p>
+                </div>
+            `
             )
             .join("");
 
-        // Añadir listener a las imágenes para redirigir a pasteleria.html al hacer click
-        const imgs = container.querySelectorAll(".producto-img");
-        imgs.forEach((img) => {
-            img.style.cursor = "pointer";
-            img.addEventListener("click", () => {
-                window.location.href = "pasteleria.html";
-            });
-        });
-    }
+        $container.html(html);
 
-    function iniciarCarruselCategorias(
-        categorias,
-        platos,
-        productosPorPagina = 2
-    ) {
-        let categoriaIndex = 0;
-        let productoIndex = 0;
-
-        function mostrarSiguiente() {
-            const categoriaActual = categorias[categoriaIndex];
-            const productosCategoria = platos[categoriaActual];
-
-            mostrarProductosDeCategoria(
-                categoriaActual,
-                platos,
-                productoIndex,
-                productosPorPagina
-            );
-
-            productoIndex += productosPorPagina;
-            if (productoIndex >= productosCategoria.length) {
-                productoIndex = 0;
-                categoriaIndex = (categoriaIndex + 1) % categorias.length;
-            }
-        }
-
-        mostrarSiguiente();
-        setInterval(mostrarSiguiente, 5000);
-    }
-
-    (async () => {
-        try {
-            const platos = await obtenerPlatos();
-            console.log(platos);
-            const categorias = obtenerCategorias(platos);
-            iniciarCarruselCategorias(categorias, platos, 2);
-        } catch (error) {
-            console.error("Error al iniciar el carrusel:", error);
-        }
-    })();
-
-    function irAPasteleria() {
-        window.location.href = "pasteleria.html";
-    }
-} catch (error) {
-    console.error("Error al verificar usuario:", error);
+        agregarEventosImagenes();
+        $container.fadeIn(CONFIG.DURACION_FADE_IN);
+    });
 }
+
+function agregarEventosImagenes() {
+    $(".producto-img").each(function () {
+        $(this)
+            .css("cursor", "pointer")
+            .on("click", function () {
+                redirigirAPasteleria();
+            });
+    });
+}
+
+function redirigirAPasteleria() {
+    window.location.href = CONFIG.PAGINA_DESTINO;
+}
+
+function iniciarCarruselCategorias(
+    categorias,
+    platos,
+    productosPorPagina = CONFIG.PRODUCTOS_POR_PAGINA
+) {
+    let categoriaIndex = 0;
+    let productoIndex = 0;
+
+    function mostrarSiguiente() {
+        const categoriaActual = categorias[categoriaIndex];
+        const productosCategoria = platos[categoriaActual] || [];
+
+        mostrarProductosDeCategoria(
+            categoriaActual,
+            platos,
+            productoIndex,
+            productosPorPagina
+        );
+
+        productoIndex += productosPorPagina;
+        if (productoIndex >= productosCategoria.length) {
+            productoIndex = 0;
+            categoriaIndex = (categoriaIndex + 1) % categorias.length;
+        }
+    }
+
+    mostrarSiguiente();
+    setInterval(mostrarSiguiente, CONFIG.INTERVALO_CARRUSEL);
+}
+
+async function inicializar(categoriasPermitidas = CONFIG.CATEGORIAS_DEFECTO) {
+    try {
+        const platos = await obtenerPlatos();
+        const categorias = obtenerCategorias(platos, categoriasPermitidas);
+
+        if (!categorias.length) {
+            throw new Error("No se encontraron categorías para mostrar");
+        }
+
+        console.log("Categorías a mostrar:", categorias);
+        iniciarCarruselCategorias(categorias, platos);
+    } catch (error) {
+        console.error("Error al iniciar la aplicación:", error);
+    }
+}
+
+function configurarEventosNavegacion() {
+    const botonPasteleria = document.getElementById("btn-pasteleria");
+
+    if (botonPasteleria) {
+        botonPasteleria.addEventListener("click", redirigirAPasteleria);
+    }
+}
+
+window.__carruselDesayunosInicializado = false;
+window.inicializarCarrusel = function (categorias = null) {
+    window.__carruselDesayunosInicializado = true;
+    configurarEventosNavegacion();
+    inicializar(categorias);
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (!window.__carruselDesayunosInicializado) {
+        configurarEventosNavegacion();
+        inicializar();
+    }
+});
