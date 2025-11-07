@@ -15,7 +15,12 @@
 
             $(document).ready(async function () {
                 try {
-                    await main();
+                    await main([
+                        "Plato del Día",
+                        "Platos Sugeridos",
+                        "Platos de Fondo",
+                        "Trattoria",
+                    ]);
                 } catch (error) {
                     console.error("Error al inicializar la cartelería:", error);
                 }
