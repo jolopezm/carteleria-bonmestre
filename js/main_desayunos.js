@@ -138,7 +138,6 @@ async function inicializar(categoriasPermitidas = CONFIG.CATEGORIAS_DEFECTO) {
             throw new Error("No se encontraron categorías para mostrar");
         }
 
-        console.log("Categorías a mostrar:", categorias);
         iniciarCarruselCategorias(categorias, platos);
     } catch (error) {
         console.error("Error al iniciar la aplicación:", error);

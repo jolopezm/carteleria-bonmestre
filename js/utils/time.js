@@ -1,11 +1,3 @@
-/**
- * Funciones para manejo de fecha y hora
- */
-
-/**
- * Obtiene la hora actual formateada
- * @returns {string} Hora en formato HH:MM (24 horas)
- */
 export function obtenerHoraActual() {
     const ahora = new Date();
     return ahora.toLocaleTimeString("es-CL", {
@@ -15,10 +7,6 @@ export function obtenerHoraActual() {
     });
 }
 
-/**
- * Obtiene configuración actual (hora, temperatura)
- * @returns {Object} Configuración con hora y temperatura
- */
 export function obtenerConfigActual() {
     return {
         hora: obtenerHoraActual(),

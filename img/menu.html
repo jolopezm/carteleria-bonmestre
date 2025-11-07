@@ -4,13 +4,17 @@
         <h1 id="categoria">Categoria</h1>
         <section id="container-productos">
             <div id="producto">
-                <img src="https://clientes.tecnoactive.cl/cms/Retail/MenuboardBonmestre/Img/Producto1.png" alt="Producto 1" />
+                <img
+                    src="https://clientes.tecnoactive.cl/cms/Retail/MenuboardBonmestre/Img/Producto1.png"
+                    alt="Producto 1" />
                 <h2>Producto 1</h2>
                 <p id="descripcion">Descripción del Producto 1</p>
                 <p id="precio">$Precio 1</p>
             </div>
             <div id="producto">
-                <img src="https://clientes.tecnoactive.cl/cms/Retail/MenuboardBonmestre/Img/Producto2.png" alt="Producto " />
+                <img
+                    src="https://clientes.tecnoactive.cl/cms/Retail/MenuboardBonmestre/Img/Producto2.png"
+                    alt="Producto " />
                 <h2>Producto 2</h2>
                 <p id="descripcion">Descripción del Producto 2</p>
                 <p id="precio">$Precio 2</p>
@@ -89,24 +93,32 @@
 <script type="module">
     try {
         async function obtenerPlatos() {
-            const response = await fetch("./data/platos.json")
+            const response = await fetch("./data/platos.json");
             if (!response.ok) {
-                throw new Error("Error al cargar el archivo JSON")
+                throw new Error("Error al cargar el archivo JSON");
             }
-            return await response.json()
+            return await response.json();
         }
 
         function obtenerCategorias(platos) {
-            return Object.keys(platos)
+            return Object.keys(platos);
         }
 
-        function mostrarProductosDeCategoria(categoria, platos, productoIndex, productosPorPagina) {
-            const container = document.getElementById("container-productos")
-            const titulo = document.getElementById("categoria")
-            titulo.textContent = categoria
+        function mostrarProductosDeCategoria(
+            categoria,
+            platos,
+            productoIndex,
+            productosPorPagina
+        ) {
+            const container = document.getElementById("container-productos");
+            const titulo = document.getElementById("categoria");
+            titulo.textContent = categoria;
 
-            const productosCategoria = platos[categoria]
-            const productosAMostrar = productosCategoria.slice(productoIndex, productoIndex + productosPorPagina)
+            const productosCategoria = platos[categoria];
+            const productosAMostrar = productosCategoria.slice(
+                productoIndex,
+                productoIndex + productosPorPagina
+            );
 
             container.innerHTML = productosAMostrar
                 .map(
@@ -119,41 +131,49 @@
             </div>
         `
                 )
-                .join("")
+                .join("");
         }
 
-        function iniciarCarruselCategorias(categorias, platos, productosPorPagina = 2) {
-            let categoriaIndex = 0
-            let productoIndex = 0
+        function iniciarCarruselCategorias(
+            categorias,
+            platos,
+            productosPorPagina = 2
+        ) {
+            let categoriaIndex = 0;
+            let productoIndex = 0;
 
             function mostrarSiguiente() {
-                const categoriaActual = categorias[categoriaIndex]
-                const productosCategoria = platos[categoriaActual]
+                const categoriaActual = categorias[categoriaIndex];
+                const productosCategoria = platos[categoriaActual];
 
-                mostrarProductosDeCategoria(categoriaActual, platos, productoIndex, productosPorPagina)
+                mostrarProductosDeCategoria(
+                    categoriaActual,
+                    platos,
+                    productoIndex,
+                    productosPorPagina
+                );
 
-                productoIndex += productosPorPagina
+                productoIndex += productosPorPagina;
                 if (productoIndex >= productosCategoria.length) {
-                    productoIndex = 0
-                    categoriaIndex = (categoriaIndex + 1) % categorias.length
+                    productoIndex = 0;
+                    categoriaIndex = (categoriaIndex + 1) % categorias.length;
                 }
             }
 
-            mostrarSiguiente()
-            setInterval(mostrarSiguiente, 5000)
+            mostrarSiguiente();
+            setInterval(mostrarSiguiente, 5000);
         }
 
-        ;(async () => {
+        (async () => {
             try {
-                const platos = await obtenerPlatos()
-                console.log(platos)
-                const categorias = obtenerCategorias(platos)
-                iniciarCarruselCategorias(categorias, platos, 2)
+                const platos = await obtenerPlatos();
+                const categorias = obtenerCategorias(platos);
+                iniciarCarruselCategorias(categorias, platos, 2);
             } catch (error) {
-                console.error("Error al iniciar el carrusel:", error)
+                console.error("Error al iniciar el carrusel:", error);
             }
-        })()
+        })();
     } catch (error) {
-        console.error("Error al verificar usuario:", error)
+        console.error("Error al verificar usuario:", error);
     }
 </script>

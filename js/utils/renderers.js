@@ -1,24 +1,20 @@
-/**
- * Funciones de renderizado de templates
- */
 import { TEMPLATE_CONFIG } from "./config.js";
 
-/**
- * Renderiza el template de introducción
- * @param {string} templateHTML - HTML del template
- * @returns {string} HTML renderizado
- */
+function truncarTexto(texto, maxLength) {
+    if (!texto || texto.length <= maxLength) return texto;
+
+    const truncado = texto.substring(0, maxLength);
+    const ultimoEspacio = truncado.lastIndexOf(" ");
+
+    return ultimoEspacio > 0
+        ? truncado.substring(0, ultimoEspacio) + "..."
+        : truncado + "...";
+}
+
 export function renderizarIntro(templateHTML) {
     return templateHTML;
 }
 
-/**
- * Renderiza el template de categoría
- * @param {string} templateHTML - HTML del template
- * @param {string} categoriaNombre - Nombre de la categoría
- * @param {Object} config - Configuración (hora, temperatura)
- * @returns {string} HTML renderizado
- */
 export function renderizarCategoria(
     templateHTML,
     categoriaNombre,
@@ -47,13 +43,6 @@ export function renderizarCategoria(
     return html;
 }
 
-/**
- * Renderiza el template de productos destacados
- * @param {string} templateHTML - HTML del template
- * @param {Array<Object>} productos - Array de productos
- * @param {Object} config - Configuración (hora, temperatura)
- * @returns {string} HTML renderizado
- */
 export function renderizarDestacados(templateHTML, productos, config = {}) {
     let html = templateHTML;
 
@@ -69,7 +58,7 @@ export function renderizarDestacados(templateHTML, productos, config = {}) {
             </div>
             <h3 class="name">${producto.nombre || ""}</h3>
             <p class="desc">
-                ${producto.descripcion || ""}
+                ${truncarTexto(producto.descripcion || "", 80)}
             </p>
             <div class="price-tag">$${
                 producto.precio ? producto.precio.toLocaleString() : ""
@@ -100,14 +89,6 @@ export function renderizarDestacados(templateHTML, productos, config = {}) {
     return html;
 }
 
-/**
- * Renderiza el template de lista de productos (paginado)
- * @param {string} templateHTML - HTML del template
- * @param {Array<Object>} productos - Array de productos
- * @param {number} paginaInicial - Página a mostrar (0-indexed)
- * @param {Object} config - Configuración (hora, temperatura, eyebrow)
- * @returns {string} HTML renderizado
- */
 export function renderizarProductos(
     templateHTML,
     productos,
@@ -145,7 +126,10 @@ export function renderizarProductos(
             }">
             <div class="left">
                 <span class="dot"></span>
-                <span class="name">${producto.nombre || ""}</span>
+                <span class="name">${truncarTexto(
+                    producto.nombre || "",
+                    30
+                )}</span>
             </div>
             <span class="price">$${
                 producto.precio ? producto.precio.toLocaleString() : ""

@@ -114,9 +114,7 @@ export async function main(categoriasAMostrar = null) {
 
         const platos = menuData.productos;
         const list = {};
-        console.log("Menú cargado:", menuData);
 
-        // ✅ Agrupar productos por categoría
         platos.forEach((plato) => {
             const categoria = plato.categoria;
 
@@ -125,22 +123,17 @@ export async function main(categoriasAMostrar = null) {
             }
 
             list[categoria].push({
-                nombre: plato.producto_descr, // ← Cambio: producto_descr
-                descripcion: plato.producto_detalle, // ← Cambio: producto_detalle
+                nombre: plato.producto_descr,
+                descripcion: plato.producto_detalle,
                 precio: plato.precio,
-                img: plato.imagen_url, // ← Cambio: imagen_url
+                img: plato.imagen_url,
                 id: plato.id_producto,
             });
         });
 
-        console.log("Menú estructurado por categorías:", list);
-
         const config = obtenerConfigActual();
 
-        // ✅ Usar las categorías del objeto agrupado
         const categorias = categoriasAMostrar || Object.keys(list);
-
-        console.log("Categorías a mostrar:", categorias);
 
         const frames = [];
 
@@ -150,12 +143,7 @@ export async function main(categoriasAMostrar = null) {
         });
 
         categorias.forEach((categoria) => {
-            // ✅ CORRECCIÓN: Usar 'list' en lugar de 'platos'
             const productosCategoria = list[categoria] || [];
-
-            console.log(
-                `Procesando categoría "${categoria}": ${productosCategoria.length} productos`
-            );
 
             if (productosCategoria.length > 0) {
                 frames.push({
@@ -182,27 +170,16 @@ export async function main(categoriasAMostrar = null) {
                         productosCategoria,
                         {
                             ...config,
-                            eyebrow: `Nuestro menú de ${categoria}`,
+                            eyebrow: `${categoria}`,
                         }
                     )
                 );
             }
         });
 
-        console.log(
-            `✅ ${frames.length} frames generados para ${categorias.length} categorías`
-        );
-
-        console.log(
-            "Frames generados:",
-            frames.map((f) => f.tipo)
-        );
-
         await inicializarCarruselFrames(frames);
-
-        console.log("🎬 Carrusel iniciado correctamente");
     } catch (error) {
-        console.error("❌ Error al inicializar la cartelería:", error);
+        console.error("error al inicializar la cartelería:", error);
         throw error;
     }
 }
