@@ -106,13 +106,42 @@ export async function main(categoriasAMostrar = null) {
     try {
         await logUser();
 
-        const menuData = await obtenerDatosMenu();
+        let menuData = await obtenerDatosMenu();
+        let platos;
 
         if (!menuData || !menuData.productos) {
-            throw new Error("No se pudieron cargar los datos del menú");
+            console.warn(
+                "No se pudo obtener el menú de la API. Cargando datos locales..."
+            );
+
+            try {
+                const response = await fetch("./data/platos.json");
+                const datosLocales = await response.json();
+
+                platos = [];
+                Object.entries(datosLocales).forEach(
+                    ([categoria, productos]) => {
+                        productos.forEach((producto) => {
+                            platos.push({
+                                categoria: categoria,
+                                producto_descr: producto.nombre,
+                                producto_detalle: producto.descripcion || "",
+                                precio: producto.precio,
+                                imagen_url: producto.img,
+                                id_producto: producto.id || Math.random(),
+                            });
+                        });
+                    }
+                );
+            } catch (errorLocal) {
+                throw new Error(
+                    "No se pudo cargar el menú desde la API ni desde el archivo local"
+                );
+            }
+        } else {
+            platos = menuData.productos;
         }
 
-        const platos = menuData.productos;
         const list = {};
 
         platos.forEach((plato) => {
@@ -132,9 +161,7 @@ export async function main(categoriasAMostrar = null) {
         });
 
         const config = obtenerConfigActual();
-
         const categorias = categoriasAMostrar || Object.keys(list);
-
         const frames = [];
 
         frames.push({
@@ -179,7 +206,7 @@ export async function main(categoriasAMostrar = null) {
 
         await inicializarCarruselFrames(frames);
     } catch (error) {
-        console.error("error al inicializar la cartelería:", error);
+        console.error("Error al inicializar la cartelería:", error);
         throw error;
     }
 }
