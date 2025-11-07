@@ -1,0 +1,566 @@
+:root {
+  --bg: #F8F3EA;
+  /* fondo crema */
+  --ink: #3D5B58;
+  /* texto principal (verde muy oscuro) */
+  --muted: #92A094;
+  /* texto secundario */
+  --brand: #3D5B58;
+  /* verde badge */
+  --accent: #E5E1E6;
+  /* resalte fila activa */
+  --bullet: #E5E1E6;
+  /* bullet inactiva */
+  --bullet-active: #BC955C;
+  /* bullet activa (dorado suave) */
+  --price: #BC955C;
+  /* precio en rojo suave */
+  --radius: 16px;
+}
+
+/* Fuentes locales */
+@font-face {
+  font-family: "AvenirNextLTPro";
+  src: url("./fonts/AvenirNextLTPro-UltLt.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AvenirNextLTPro";
+  src: url("./fonts/AvenirNextLTPro-UltLt.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AvenirNextLTPro";
+  src: url("./fonts/AvenirNextLTPro-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "AvenirNextLTPro";
+  src: url("./fonts/AvenirNextLTPro-Demi.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Hoefler Text */
+@font-face {
+  font-family: "HoeflerText";
+  src: url("./fonts/Hoefler-text.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HoeflerText";
+  src: url("./fonts/Hoefler-Text-Black.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+* {
+  box-sizing: border-box
+}
+
+html,
+body {
+  width: 1920px;
+  height: 1080px;
+  margin: 0;
+  padding: 0;
+  font-family: "AvenirNextLTPro", system-ui, sans-serif;
+  font-weight: 200;
+  letter-spacing: 2px;
+  color: #3d5b58;
+}
+
+/* layout general */
+.screen {
+  position: relative;
+  height: 100%;
+  padding: 28px 36px;
+  background: var(--bg);
+  background-image: url('../img/Pantalla3/fondo-1.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* === Pantalla 0: Intro */
+.screen.intro {
+  position: relative;
+  display: flex;
+  align-items: center;
+  /* centra verticalmente */
+  justify-content: center;
+  /* centra horizontalmente */
+  height: 100%;
+  width: 100%;
+  background-image: url('../img/Pantalla3/fondo-intro.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+}
+
+.logo-center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-center img {
+  width: 460px;
+  height: auto;
+  display: block;
+  animation: fadeInScale 1.6s ease forwards;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 1. DESAYUNOS*/
+.screen.category {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url('../img/Pantalla3/fondo-category.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+/* Header fijo arriba */
+.screen.category .top {
+  position: absolute;
+  top: 40px;
+  left: 80px;
+  right: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+/* Logo */
+.screen.category .top .logo img {
+  height: 60px;
+  width: auto;
+}
+
+/* Time badge */
+.screen.category .top .time-badge {
+  background: #3D5B58;
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 45px;
+  letter-spacing: 3px;
+}
+
+/* Centrar SOLO el contenido principal */
+.screen.category .hero {
+  flex: 1; /* ocupa todo el alto restante */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 5;
+}
+
+/* Texto principal */
+.screen.category .hero .title {
+  position: relative;
+  font-family: "HoeflerText", serif;
+  font-weight: 700;
+  font-size: 110px;
+  text-transform: uppercase;
+  color: #243024;
+  letter-spacing: .04em;
+  padding-bottom: 20px; /* deja espacio para la línea */
+}
+
+/* Subrayado dorado degradado parcial */
+.screen.category .hero .title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 349px; /* controla largo: prueba entre 150–200px */
+  height: 7px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    #CFA74A 0%,
+    #EBD28F 45%,
+    #EBD28F 55%,
+    #CFA74A 100%
+  );
+}
+
+
+
+/* header */
+.top {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 103px;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.logo img {
+  height: 52px;
+  display: block;
+}
+
+.time-badge {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translateY(12px);
+  background: var(--brand);
+  color: #fff;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-weight: 600;
+  font-size: 45px;
+  letter-spacing: 3.2px;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .08) inset, 0 10px 20px rgba(0, 0, 0, .06);
+}
+
+.time-badge span.sep {
+  opacity: .5
+}
+
+/* cuerpo */
+.content {
+  display: grid;
+  grid-template-columns: 811px 1fr;
+  gap: 35px;
+  margin-top: 8px;
+  align-items: start;
+}
+
+/* foto izquierda */
+.photo {
+
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, .05) inset,
+    0 22px 40px rgba(0, 0, 0, .06);
+}
+
+.photo img {
+  width: 730px;
+  height: 960px;
+  border-radius: 12px;
+  display: block;
+  border: solid 20px #fff;
+}
+
+/* bloque menú derecho */
+.menu {
+  padding-top: 14px;
+}
+
+.eyebrow {
+  font-size: 40px;
+  font-weight: 700;
+  color: #3d5b58;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  margin-top: 54px;
+}
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 29px;
+}
+
+.item {
+  font-size: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px 19px 17px;
+  border-radius: 12px;
+}
+
+.item .left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  font-weight: 300;
+}
+
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bullet);
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.02);
+  flex: none;
+}
+
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #2F3A2F;
+}
+
+.price {
+  font-weight: 300;
+  color: var(--price);
+  margin-left: 16px;
+}
+
+/* Estado activo (primera fila) */
+.item.active {
+  background: var(--accent);
+}
+
+.item.active .dot {
+  background: var(--bullet-active);
+}
+
+.item.active .price {
+  color: var(--price);
+  border-radius: 10px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .05) inset;
+}
+
+/* footer invisible para alineación (si quisieras algo luego) */
+.footer {
+  height: 20px;
+}
+
+/* ===== Deck de pantallas (organización y rotación) ===== */
+.deck {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--bg);
+ pointer-events: none;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .6s ease;
+}
+
+.frame.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+/* ===== Pantalla3: Productos destacados ===== */
+
+.screen.dark {
+  background: #3D5B58;
+  /* tono verde oscuro */
+  background-image: url('../img/Pantalla3/fondo-2.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+/* Badge claro (fondo blanco) */
+.time-badge.light {
+  background: #F8F9FC;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Contenido principal */
+.featured {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: calc(100% - 207px);
+  gap: 45px;
+}
+
+.featured .title {
+  font-family: "HoeflerText", serif;
+  font-weight: 700;
+  font-size: 48px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #F6F7F2;
+  margin-top: 2px;
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 70px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 360px;
+}
+
+.img-wrap {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: #F8F9FC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.img-wrap img {
+  width: 92%;
+  height: auto;
+  border-radius: 50%;
+  display: block;
+}
+
+.card .name {
+  font-family: "AvenirNextLTPro", sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  color: #E2DFE2;
+  margin-bottom: 10px;
+}
+
+.card .desc {
+  font-family: "AvenirNextLTPro", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #E2DFE2;
+  margin-bottom: 20px;
+  max-width: 300px;
+}
+
+.price-tag {
+  font-family: "AvenirNextLTPro", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  background: #E2DFE2;
+  color: var(--ink);
+  padding: 8px 22px;
+  border-radius: 30px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .08) inset;
+}
+
+
+/* ===== Aro dorado con degradado + corte ===== */
+/* Úsalo en la tarjeta redonda de la Pantalla 2 */
+.img-wrap.ring-gold {
+  --size: 320px;
+  /* diámetro del círculo blanco */
+  --stroke: 12px;
+  /* grosor de los aros */
+  --offset: 10px;
+  /* separación entre ambos aros */
+  --cut: 58deg;
+  /* tamaño del corte (ángulo vacío) */
+  --rotate: 90deg;
+  /* rota el conjunto para mover el corte */
+  --g1: #EED9A0;
+  /* dorado claro */
+  --g2: #DDB665;
+  /* dorado medio */
+  --g3: #B88B3A;
+  /* dorado oscuro */
+
+  position: relative;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  margin-bottom: 28px;
+  /* sutil profundidad del plato */
+  box-shadow: 0 18px 44px rgba(0, 0, 0, .18);
+}
+
+/* Imagen dentro (recorta en círculo) */
+.img-wrap.ring-gold>img {
+  width: 92%;
+  height: 92%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Aro exterior (degradado + corte) */
+.img-wrap.ring-gold::before {
+  content: "";
+  position: absolute;
+  inset: calc(-2 * var(--stroke));
+  border-radius: 50%;
+  /* degradado dorado a lo largo del aro */
+  background: conic-gradient(from var(--rotate),
+      var(--g1) 0deg,
+      var(--g2) 31%,
+      var(--g3) 44%,
+      var(--g2) 66%,
+      var(--g1) 88%,
+      transparent calc(360deg - var(--cut)) 360deg);
+  /* máscara para dejar solo “grosor de aro” */
+  -webkit-mask:
+    radial-gradient(farthest-side,
+      transparent calc(100% - var(--stroke)),
+      #000 calc(100% - var(--stroke)));
+  mask: radial-gradient(farthest-side,
+      transparent calc(102% - var(--stroke)),
+      #000 calc(100% - var(--stroke)));
+  pointer-events: none;
+}
