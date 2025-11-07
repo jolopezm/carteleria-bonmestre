@@ -11,75 +11,20 @@
         <div id="app-container"></div>
 
         <script type="module">
-            import {
-                obtenerConfigActual,
-                generarFramesProductosPaginados,
-                inicializarCarruselFrames,
-            } from "./js/template-manager.js";
+            import { main } from "./js/template-manager.js";
 
             $(document).ready(async function () {
                 try {
-                    const response = await fetch("./data/platos.json");
-                    const platos = await response.json();
-                    const config = obtenerConfigActual();
+                    await main();
 
-                    const categoriasAMostrar = [
-                        "Desayuno y Tostadas",
-                        "Cafetería",
-                        "Brunches",
-                        "Pastelería",
-                        "Platos de Fondo",
-                        "Hamburguesas",
-                    ];
-
-                    const frames = [];
-
-                    frames.push({
-                        tipo: "intro",
-                        template: "intro",
-                    });
-
-                    categoriasAMostrar.forEach((categoria) => {
-                        const productosCategoria = platos[categoria] || [];
-
-                        if (productosCategoria.length > 0) {
-                            frames.push({
-                                tipo: "categoria",
-                                template: "categoria",
-                                data: { nombre: categoria },
-                                config: config,
-                            });
-
-                            if (productosCategoria.length >= 3) {
-                                frames.push({
-                                    tipo: "destacados",
-                                    template: "destacados",
-                                    data: {
-                                        productos: productosCategoria.slice(
-                                            0,
-                                            3
-                                        ),
-                                    },
-                                    config: config,
-                                });
-                            }
-
-                            frames.push(
-                                ...generarFramesProductosPaginados(
-                                    "productos",
-                                    productosCategoria,
-                                    {
-                                        ...config,
-                                        eyebrow: `Nuestro menú de ${categoria}`,
-                                    }
-                                )
-                            );
-                        }
-                    });
-
-                    await inicializarCarruselFrames(frames);
+                    // Especificar categorías personalizadas
+                    // await main([
+                    //     "Desayuno y Tostadas",
+                    //     "Cafetería",
+                    //     "Pastelería"
+                    // ]);
                 } catch (error) {
-                    console.error("Error al inicializar:", error);
+                    console.error("Error al inicializar la cartelería:", error);
                 }
             });
         </script>
