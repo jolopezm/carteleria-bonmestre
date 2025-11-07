@@ -1,169 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cartelería Auto - Bonmestre</title>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <link rel="stylesheet" href="css/styles-1.css" />
+    </head>
+    <body>
+        <div id="app-container"></div>
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=1920, initial-scale=1" />
-    <title>Bonmestre – Menú</title>
-    <link rel="stylesheet" href="css/styles-1.css" />
-</head>
+        <script type="module">
+            import {
+                obtenerConfigActual,
+                generarFramesProductosPaginados,
+                inicializarCarruselFrames,
+            } from "./js/template-manager.js";
 
-<body>
+            $(document).ready(async function () {
+                try {
+                    const response = await fetch("./data/platos.json");
+                    const platos = await response.json();
+                    const config = obtenerConfigActual();
 
+                    const categoriasAMostrar = [
+                        "Desayuno y Tostadas",
+                        "Cafetería",
+                        "Brunches",
+                        "Pastelería",
+                        "Platos de Fondo",
+                        "Hamburguesas",
+                    ];
 
-    <!-- Deck contenedor de todas las pantallas -->
-    <div class="deck" id="bonmestre-deck">
+                    const frames = [];
 
-          <!-- ===== 0. PANTALLA INTRO ===== -->
-  <section class="frame is-active" id="pantalla-0">
-    <div class="screen intro">
-      <div class="logo-center">
-        <img src="img/Pantalla3/logo-bonmestre.svg" alt="Bonmestre logo">
-      </div>
-    </div>
-  </section>
+                    frames.push({
+                        tipo: "intro",
+                        template: "intro",
+                    });
 
-    <!-- ===== 1. DESAYUNOS ===== -->
-  <section class="frame " id="pantalla-1">
-    <div class="screen category">
-      <header class="top">
-        <div class="logo"><img src="img/Pantalla3/logo-bonmestre-2.svg" alt="Bonmestre logo"></div>
-        <div class="time-badge"><span>17:39</span><span class="sep">|</span><span>31°</span></div>
-      </header>
-      <main class="hero">
-        <h1 class="title">Desayunos</h1>
-    
-      </main>
-    </div>
-  </section>
+                    categoriasAMostrar.forEach((categoria) => {
+                        const productosCategoria = platos[categoria] || [];
 
+                        if (productosCategoria.length > 0) {
+                            frames.push({
+                                tipo: "categoria",
+                                template: "categoria",
+                                data: { nombre: categoria },
+                                config: config,
+                            });
 
-    <!-- ===== 2. PRODUCTOS DESTACADOS ===== -->
-  <section class="frame " id="pantalla-2">
-    <div class="screen dark">
-      <header class="top">
-        <div class="logo"><img src="img/Pantalla3/logo-bonmestre.svg" alt="Bonmestre logo"></div>
-        <div class="time-badge light"><span>17:39</span><span class="sep">|</span><span>31°</span></div>
-      </header>
-      <main class="featured">
-        <h2 class="title">Productos destacados</h2>
-        <div class="cards">
-          <article class="card">
-            <div class="img-wrap ring-gold cut-top-left">
-              <img src="img/Pantalla3/1b.jpg" alt="Tostadas del Huerto">
-            </div>
-            <h3 class="name">Tostadas del Huerto</h3>
-            <p class="desc">Palta molida, terminadas con huevos revueltos y ciboulette.</p>
-            <div class="price-tag">$6.650</div>
-          </article>
-          <article class="card">
-            <div class="img-wrap ring-gold cut-top-left">
-              <img src="img/Pantalla3/2b.jpg" alt="Tostadas del Huerto">
-            </div>
-            <h3 class="name">Tostadas del Huerto</h3>
-            <p class="desc">Palta molida, terminadas con huevos revueltos y ciboulette.</p>
-            <div class="price-tag">$6.650</div>
-          </article>
-          <article class="card">
-            <div class="img-wrap ring-gold cut-top-left">
-              <img src="img/Pantalla3/3b.jpg" alt="Tostadas del Huerto">
-            </div>
-            <h3 class="name">Tostadas del Huerto</h3>
-            <p class="desc">Palta molida, terminadas con huevos revueltos y ciboulette.</p>
-            <div class="price-tag">$6.650</div>
-          </article>
-        </div>
-      </main>
-    </div>
-  </section>
+                            if (productosCategoria.length >= 3) {
+                                frames.push({
+                                    tipo: "destacados",
+                                    template: "destacados",
+                                    data: {
+                                        productos: productosCategoria.slice(
+                                            0,
+                                            3
+                                        ),
+                                    },
+                                    config: config,
+                                });
+                            }
 
+                            frames.push(
+                                ...generarFramesProductosPaginados(
+                                    "productos",
+                                    productosCategoria,
+                                    {
+                                        ...config,
+                                        eyebrow: `Nuestro menú de ${categoria}`,
+                                    }
+                                )
+                            );
+                        }
+                    });
 
-        <!-- ===== 3. MENÚ DE PRODUCTOS ===== -->
-        <section class="frame " id="pantalla-3">
-            <div class="screen">
-
-
-                <!-- contenido -->
-                <main class="content">
-                    <!-- FOTO IZQUIERDA -->
-                    <figure class="photo">
-                        <!-- Reemplaza por tu foto -->
-                        <img src="img/Pantalla3/1.png" alt="Plato destacado">
-                    </figure>
-
-                    <!-- LISTA DERECHA -->
-                    <section class="menu">
-
-                        <!-- header -->
-                        <header class="top">
-                            <div class="logo">
-                                <!-- Reemplaza por tu PNG/SVG de marca -->
-                                <img src="img/Pantalla3/logo.png" alt="Bonmestre logo">
-                            </div>
-                            <div class="time-badge" aria-label="hora y temperatura">
-                                <span>17:39</span><span class="sep">|</span><span>31°</span>
-                            </div>
-                        </header>
-                        <div class="eyebrow">Nuestros productos</div>
-
-                        <div class="menu-list">
-                            <div class="item active">
-                                <div class="left">
-                                    <span class="dot"></span>
-                                    <span class="name">Croissant Artesanal</span>
-                                </div>
-                                <span class="price">$3.500</span>
-                            </div>
-
-                            <div class="item">
-                                <div class="left">
-                                    <span class="dot"></span>
-                                    <span class="name">Croissant Artesanal</span>
-                                </div>
-                                <span class="price">$3.500</span>
-                            </div>
-
-                            <div class="item">
-                                <div class="left">
-                                    <span class="dot"></span>
-                                    <span class="name">Croissant Artesanal</span>
-                                </div>
-                                <span class="price">$3.500</span>
-                            </div>
-
-                            <div class="item">
-                                <div class="left">
-                                    <span class="dot"></span>
-                                    <span class="name">Croissant Artesanal</span>
-                                </div>
-                                <span class="price">$3.500</span>
-                            </div>
-
-                            <div class="item">
-                                <div class="left">
-                                    <span class="dot"></span>
-                                    <span class="name">Croissant Artesanal</span>
-                                </div>
-                                <span class="price">$3.500</span>
-                            </div>
-
-                            <div class="item">
-                                <div class="left">
-                                    <span class="dot"></span>
-                                    <span class="name">Croissant Artesanal</span>
-                                </div>
-                                <span class="price">$3.500</span>
-                            </div>
-                        </div>
-                    </section>
-                </main>
-
-                <div class="footer"></div>
-            </div>
-        </section>
-
-    </div>
-    <script src="js/auto-frames.js"></script>
-</body>
-
+                    await inicializarCarruselFrames(frames);
+                } catch (error) {
+                    console.error("Error al inicializar:", error);
+                }
+            });
+        </script>
+    </body>
 </html>
