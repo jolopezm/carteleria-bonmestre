@@ -1,4 +1,5 @@
 import { TEMPLATE_CONFIG } from "./config.js";
+import { obtenerConfigActual } from "../utils/time.js";
 
 const $ = window.$;
 
@@ -94,10 +95,6 @@ export function iniciarRotacionFrames() {
 
         if (frameActual === 0) {
             ciclosCompletados++;
-            setTimeout(() => {
-                location.reload();
-            }, TEMPLATE_CONFIG.INTERVALO_FRAMES);
-            return;
         }
 
         const $nuevoFrame = $frames.eq(frameActual);

@@ -13,6 +13,7 @@ import {
 import { iniciarRotacionFrames } from "./utils/carousel.js";
 
 const $ = window.$;
+let data = {};
 
 export function generarFramesProductosPaginados(
     template,
@@ -102,9 +103,44 @@ export async function inicializarCarruselFrames(frames) {
     iniciarRotacionFrames();
 }
 
+function actualizarHoraEnTiempoReal() {
+    const $horaElemento = $(".hora");
+    if (!$horaElemento.length) {
+        console.warn("No se encontró el elemento para mostrar la hora.");
+        return;
+    }
+
+    setInterval(() => {
+        const horaActual = new Date().toLocaleTimeString("es-CL", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+        });
+
+        $horaElemento.text(horaActual);
+    }, 1000); // Actualiza cada segundo
+}
+
 export async function main(categoriasAMostrar = null) {
     try {
         await logUser();
+
+        const transformarCategoria = (categoria) => {
+            switch (categoria) {
+                case "Desayuno y Tostadas":
+                    return "Desayunos y Tostadas";
+                case "Pasteleria":
+                    return "Pastelería";
+                case "Cafeteria":
+                    return "Cafetería";
+                default:
+                    return categoria;
+            }
+        };
+
+        if (categoriasAMostrar) {
+            categoriasAMostrar = categoriasAMostrar.map(transformarCategoria);
+        }
 
         let menuData = await obtenerDatosMenu();
         let platos;
@@ -139,11 +175,13 @@ export async function main(categoriasAMostrar = null) {
                 );
             }
         } else {
-            platos = menuData.productos;
+            platos = menuData.productos.map((producto) => ({
+                ...producto,
+                categoria: transformarCategoria(producto.categoria),
+            }));
         }
 
         const list = {};
-
         platos.forEach((plato) => {
             const categoria = plato.categoria;
 
@@ -161,7 +199,7 @@ export async function main(categoriasAMostrar = null) {
         });
 
         const config = obtenerConfigActual();
-        const categorias = categoriasAMostrar || Object.keys(list);
+        let categorias = categoriasAMostrar || Object.keys(list);
         const frames = [];
 
         frames.push({
@@ -205,6 +243,7 @@ export async function main(categoriasAMostrar = null) {
         });
 
         await inicializarCarruselFrames(frames);
+        actualizarHoraEnTiempoReal();
     } catch (error) {
         console.error("Error al inicializar la cartelería:", error);
         throw error;

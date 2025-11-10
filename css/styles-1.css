@@ -469,11 +469,18 @@ body {
 }
 
 .card .name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: "AvenirNextLTPro", sans-serif;
     font-weight: 600;
     font-size: 30px;
     color: #e2dfe2;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
     margin-bottom: 10px;
+    height: 130px;
 }
 
 .card .desc {
@@ -483,6 +490,7 @@ body {
     color: #e2dfe2;
     margin-bottom: 20px;
     max-width: 300px;
+    height: 100px;
 }
 
 .price-tag {
@@ -494,6 +502,7 @@ body {
     padding: 8px 22px;
     border-radius: 30px;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08) inset;
+    margin-top: 20px;
 }
 
 /* ===== Aro dorado con degradado + corte ===== */
