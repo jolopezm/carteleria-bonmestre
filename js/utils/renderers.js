@@ -61,7 +61,7 @@ export function renderizarDestacados(templateHTML, productos, config = {}) {
                 ${truncarTexto(producto.descripcion || "", 80)}
             </p>
             <div class="price-tag">$${
-                producto.precio ? producto.precio.toLocaleString() : ""
+                producto.precio ? producto.precio.toLocaleString("es-CL") : ""
             }</div>
         </article>
     `
@@ -132,7 +132,7 @@ export function renderizarProductos(
                 )}</span>
             </div>
             <span class="price">$${
-                producto.precio ? producto.precio.toLocaleString() : ""
+                producto.precio ? producto.precio.toLocaleString("es-CL") : ""
             }</span>
         </div>
     `;
