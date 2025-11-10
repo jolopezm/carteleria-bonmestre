@@ -51,6 +51,22 @@ export async function obtenerDatosMenu() {
     }
 }
 
+export function actualizarHora() {
+    const $horaElemento = $(".time-badge #hora");
+    if (!$horaElemento.length) {
+        console.warn("El elemento #hora no se encontró en el DOM.");
+        return;
+    }
+
+    const horaActual = new Date().toLocaleTimeString("es-CL", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+    });
+
+    $horaElemento.text(horaActual);
+}
+
 export async function inicializarCarruselFrames(frames) {
     const $container = $("#app-container");
 
@@ -101,24 +117,6 @@ export async function inicializarCarruselFrames(frames) {
     $container.html(framesHTML.join(""));
 
     iniciarRotacionFrames();
-}
-
-function actualizarHoraEnTiempoReal() {
-    const $horaElemento = $(".hora");
-    if (!$horaElemento.length) {
-        console.warn("No se encontró el elemento para mostrar la hora.");
-        return;
-    }
-
-    setInterval(() => {
-        const horaActual = new Date().toLocaleTimeString("es-CL", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-        });
-
-        $horaElemento.text(horaActual);
-    }, 1000); // Actualiza cada segundo
 }
 
 export async function main(categoriasAMostrar = null) {
@@ -243,7 +241,10 @@ export async function main(categoriasAMostrar = null) {
         });
 
         await inicializarCarruselFrames(frames);
-        actualizarHoraEnTiempoReal();
+        setInterval(() => {
+            actualizarHora();
+            console.log("Hora actualizada");
+        }, 1000);
     } catch (error) {
         console.error("Error al inicializar la cartelería:", error);
         throw error;
