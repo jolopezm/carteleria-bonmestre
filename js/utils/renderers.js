@@ -128,7 +128,7 @@ export function renderizarProductos(
                 <span class="dot"></span>
                 <span class="name">${truncarTexto(
                     producto.nombre || "",
-                    30
+                    60
                 )}</span>
             </div>
             <span class="price">$${
