@@ -243,7 +243,6 @@ export async function main(categoriasAMostrar = null) {
         await inicializarCarruselFrames(frames);
         setInterval(() => {
             actualizarHora();
-            console.log("Hora actualizada");
         }, 1000);
     } catch (error) {
         console.error("Error al inicializar la cartelería:", error);
