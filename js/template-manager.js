@@ -1,5 +1,6 @@
 import { logUser } from "../api/auth-service.js";
 import { obtenerMenuQR } from "../api/menu-service.js";
+import { getCurrentWeather } from "../api/weather.js";
 import { getQueryStrings } from "./utils/getQueryStrings.js";
 import { TEMPLATE_CONFIG } from "./utils/config.js";
 import { obtenerConfigActual } from "./utils/time.js";
@@ -51,8 +52,9 @@ export async function obtenerDatosMenu() {
     }
 }
 
-export function actualizarHora() {
+export function actualizarHora(weatherData) {
     const $horaElemento = $(".time-badge #hora");
+    const $temperaturaElemento = $(".time-badge #temperatura");
     if (!$horaElemento.length) {
         console.warn("El elemento #hora no se encontró en el DOM.");
         return;
@@ -63,6 +65,11 @@ export function actualizarHora() {
         minute: "2-digit",
         hour12: false,
     });
+
+    if (weatherData && weatherData.current) {
+        const temperatura = Math.round(weatherData.current.temperature);
+        $temperaturaElemento.text(`${temperatura}°`);
+    }
 
     $horaElemento.text(horaActual);
 }
@@ -122,6 +129,7 @@ export async function inicializarCarruselFrames(frames) {
 export async function main(categoriasAMostrar = null) {
     try {
         await logUser();
+        const weatherData = await getCurrentWeather();
 
         const transformarCategoria = (categoria) => {
             switch (categoria) {
@@ -242,7 +250,7 @@ export async function main(categoriasAMostrar = null) {
 
         await inicializarCarruselFrames(frames);
         setInterval(() => {
-            actualizarHora();
+            actualizarHora(weatherData);
         }, 1000);
     } catch (error) {
         console.error("Error al inicializar la cartelería:", error);
