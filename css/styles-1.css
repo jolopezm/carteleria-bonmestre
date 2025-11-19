@@ -317,6 +317,9 @@ body {
     justify-content: space-between;
     padding: 12px 18px 19px 17px;
     border-radius: 12px;
+    /* ✅ Añadir transiciones suaves */
+    transition: all 0.4s ease-out, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateY(0);
 }
 
 .item .left {
@@ -357,16 +360,40 @@ body {
 /* Estado activo (primera fila) */
 .item.active {
     background: var(--accent);
+    /* ✅ Efecto de "salto" sutil hacia arriba al activarse */
+    transform: translateY(-4px);
 }
 
-.item.active .dot {
-    background: var(--bullet-active);
+/* ✅ Animación de entrada desde abajo */
+.item.slide-in {
+    animation: slideInUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-.item.active .price {
-    color: var(--price);
-    border-radius: 10px;
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.05) inset;
+@keyframes slideInUp {
+    0% {
+        transform: translateY(20px);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-4px);
+        opacity: 1;
+    }
+}
+
+/* ✅ Animación de salida hacia arriba */
+.item.slide-out {
+    animation: slideOutUp 0.4s ease-out forwards;
+}
+
+@keyframes slideOutUp {
+    0% {
+        transform: translateY(-4px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-20px);
+        opacity: 0.7;
+    }
 }
 
 /* footer invisible para alineación (si quisieras algo luego) */

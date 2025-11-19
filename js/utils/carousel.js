@@ -1,5 +1,4 @@
 import { TEMPLATE_CONFIG } from "./config.js";
-import { obtenerConfigActual } from "../utils/time.js";
 
 const $ = window.$;
 
@@ -37,8 +36,11 @@ export function iniciarRotacionProductos($frame, onComplete) {
         return;
     }
 
-    $items.removeClass("active");
-    $items.eq(0).addClass("active");
+    // ✅ Inicializar: quitar todas las clases de animación
+    $items.removeClass("active slide-in slide-out");
+
+    // ✅ Activar el primer elemento con animación
+    $items.eq(0).addClass("active slide-in");
 
     const primeraImg = $items.eq(0).data("producto-img");
     $imgDestacada.attr("src", primeraImg);
@@ -47,23 +49,28 @@ export function iniciarRotacionProductos($frame, onComplete) {
     let productosIterados = 1;
 
     const intervalo = setInterval(() => {
-        $items.removeClass("active");
+        // ✅ Agregar animación de salida al item actual
+        const $itemActual = $items.eq(indiceActual);
+        $itemActual.removeClass("active slide-in").addClass("slide-out");
 
+        // ✅ Calcular siguiente índice
         indiceActual = (indiceActual + 1) % $items.length;
         productosIterados++;
 
         const $itemSiguiente = $items.eq(indiceActual);
+        const nuevaImg = $itemSiguiente.data("producto-img");
 
-        $imgDestacada.fadeOut(
-            TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO,
-            function () {
-                const nuevaImg = $itemSiguiente.data("producto-img");
-                $(this).attr("src", nuevaImg);
-                $(this).fadeIn(TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO);
-            }
-        );
+        // ✅ Iniciar cambio de imagen y animación de producto AL MISMO TIEMPO
+        $imgDestacada.fadeOut(TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO, function () {
+            $(this).attr("src", nuevaImg);
+            $(this).fadeIn(TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO);
+        });
 
-        $itemSiguiente.addClass("active");
+        // ✅ Activar el siguiente producto con un delay mínimo para suavizar la transición
+        setTimeout(() => {
+            $items.removeClass("slide-out");
+            $itemSiguiente.addClass("active slide-in");
+        }, 20); // Ajusta este valor (0-100ms funciona bien)
 
         if (productosIterados >= $items.length) {
             clearInterval(intervalo);

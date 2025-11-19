@@ -129,7 +129,7 @@ export async function inicializarCarruselFrames(frames) {
 export async function main(categoriasAMostrar = null) {
     try {
         await logUser();
-        const weatherData = await getCurrentWeather();
+        let weatherData = await getCurrentWeather();
 
         const transformarCategoria = (categoria) => {
             switch (categoria) {
@@ -249,6 +249,11 @@ export async function main(categoriasAMostrar = null) {
         });
 
         await inicializarCarruselFrames(frames);
+
+        setInterval(async () => {
+            weatherData = await getCurrentWeather();
+        }, 600000);
+
         setInterval(() => {
             actualizarHora(weatherData);
         }, 1000);
