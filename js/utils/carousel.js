@@ -1,19 +1,20 @@
-import { TEMPLATE_CONFIG } from "./config.js";
+import { TEMPLATE_CONFIG } from "./config.js"
+import { obtenerConfigActual } from "../utils/time.js"
 
-const $ = window.$;
+const $ = window.$
 
-let intervalosActivos = [];
-let intervaloFrames = null;
+let intervalosActivos = []
+let intervaloFrames = null
 
 export function limpiarIntervalos() {
-    intervalosActivos.forEach((intervalo) => clearInterval(intervalo));
-    intervalosActivos = [];
+    intervalosActivos.forEach((intervalo) => clearInterval(intervalo))
+    intervalosActivos = []
 }
 
 export function pausarCarruselFrames() {
     if (intervaloFrames) {
-        clearInterval(intervaloFrames);
-        intervaloFrames = null;
+        clearInterval(intervaloFrames)
+        intervaloFrames = null
     }
 }
 
@@ -22,117 +23,108 @@ export function reanudarCarruselFrames(callback) {
         intervaloFrames = setInterval(
             callback,
             TEMPLATE_CONFIG.INTERVALO_FRAMES
-        );
+        )
     }
 }
 
 export function iniciarRotacionProductos($frame, onComplete) {
-    const $menuList = $frame.find(".menu-list");
-    const $items = $menuList.find(".item");
-    const $imgDestacada = $frame.find(".producto-img-destacada");
+    const $menuList = $frame.find(".menu-list")
+    const $items = $menuList.find(".item")
+    const $imgDestacada = $frame.find(".producto-img-destacada")
 
     if ($items.length <= 1) {
-        if (onComplete) onComplete();
-        return;
+        if (onComplete) onComplete()
+        return
     }
 
-    // ✅ Inicializar: quitar todas las clases de animación
-    $items.removeClass("active slide-in slide-out");
+    $items.removeClass("active")
+    $items.eq(0).addClass("active")
 
-    // ✅ Activar el primer elemento con animación
-    $items.eq(0).addClass("active slide-in");
+    const primeraImg = $items.eq(0).data("producto-img")
+    $imgDestacada.attr("src", primeraImg)
 
-    const primeraImg = $items.eq(0).data("producto-img");
-    $imgDestacada.attr("src", primeraImg);
-
-    let indiceActual = 0;
-    let productosIterados = 1;
+    let indiceActual = 0
+    let productosIterados = 1
 
     const intervalo = setInterval(() => {
-        // ✅ Agregar animación de salida al item actual
-        const $itemActual = $items.eq(indiceActual);
-        $itemActual.removeClass("active slide-in").addClass("slide-out");
+        $items.removeClass("active")
 
-        // ✅ Calcular siguiente índice
-        indiceActual = (indiceActual + 1) % $items.length;
-        productosIterados++;
+        indiceActual = (indiceActual + 1) % $items.length
+        productosIterados++
 
-        const $itemSiguiente = $items.eq(indiceActual);
-        const nuevaImg = $itemSiguiente.data("producto-img");
+        const $itemSiguiente = $items.eq(indiceActual)
 
-        // ✅ Iniciar cambio de imagen y animación de producto AL MISMO TIEMPO
-        $imgDestacada.fadeOut(TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO, function () {
-            $(this).attr("src", nuevaImg);
-            $(this).fadeIn(TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO);
-        });
-
-        // ✅ Activar el siguiente producto con un delay mínimo para suavizar la transición
-        setTimeout(() => {
-            $items.removeClass("slide-out");
-            $itemSiguiente.addClass("active slide-in");
-        }, 20); // Ajusta este valor (0-100ms funciona bien)
+        $imgDestacada.fadeOut(
+            TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO,
+            function () {
+                const nuevaImg = $itemSiguiente.data("producto-img")
+                $(this).attr("src", nuevaImg)
+                $itemSiguiente.addClass("active")
+                $(this).fadeIn(TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO)
+            }
+        )
 
         if (productosIterados >= $items.length) {
-            clearInterval(intervalo);
-            limpiarIntervalos();
+            clearInterval(intervalo)
+            limpiarIntervalos()
 
             if (onComplete) {
-                setTimeout(onComplete, 500);
+                setTimeout(onComplete, 500)
             }
         }
-    }, TEMPLATE_CONFIG.INTERVALO_PRODUCTOS);
+    }, TEMPLATE_CONFIG.INTERVALO_PRODUCTOS)
 
-    intervalosActivos.push(intervalo);
+    intervalosActivos.push(intervalo)
 }
 
 export function iniciarRotacionFrames() {
-    const $frames = $(".frame");
-    let frameActual = 0;
-    let ciclosCompletados = 0;
+    const $frames = $(".frame")
+    let frameActual = 0
+    let ciclosCompletados = 0
 
     function avanzarFrame() {
-        const $frameActual = $frames.eq(frameActual);
-        limpiarIntervalos();
+        const $frameActual = $frames.eq(frameActual)
+        limpiarIntervalos()
 
         $frameActual
             .removeClass("is-active")
-            .slideUp(TEMPLATE_CONFIG.DURACION_FADE);
+            .slideUp(TEMPLATE_CONFIG.DURACION_FADE)
 
-        frameActual = (frameActual + 1) % $frames.length;
+        frameActual = (frameActual + 1) % $frames.length
 
         if (frameActual === 0) {
-            ciclosCompletados++;
+            ciclosCompletados++
         }
 
-        const $nuevoFrame = $frames.eq(frameActual);
+        const $nuevoFrame = $frames.eq(frameActual)
 
         $nuevoFrame
             .addClass("is-active")
             .slideDown(TEMPLATE_CONFIG.DURACION_FADE, function () {
                 if ($nuevoFrame.find(".menu-list").length) {
-                    pausarCarruselFrames();
+                    pausarCarruselFrames()
 
                     iniciarRotacionProductos($nuevoFrame, function () {
-                        reanudarCarruselFrames(avanzarFrame);
-                    });
+                        reanudarCarruselFrames(avanzarFrame)
+                    })
                 }
-            });
+            })
     }
 
-    const $primerFrame = $frames.eq(frameActual);
-    $primerFrame.addClass("is-active").fadeIn(TEMPLATE_CONFIG.DURACION_FADE);
+    const $primerFrame = $frames.eq(frameActual)
+    $primerFrame.addClass("is-active").fadeIn(TEMPLATE_CONFIG.DURACION_FADE)
 
     if ($primerFrame.find(".menu-list").length) {
         iniciarRotacionProductos($primerFrame, function () {
             intervaloFrames = setInterval(
                 avanzarFrame,
                 TEMPLATE_CONFIG.INTERVALO_FRAMES
-            );
-        });
+            )
+        })
     } else {
         intervaloFrames = setInterval(
             avanzarFrame,
             TEMPLATE_CONFIG.INTERVALO_FRAMES
-        );
+        )
     }
 }

@@ -1,18 +1,18 @@
-import { TEMPLATE_CONFIG } from "./config.js";
+import { TEMPLATE_CONFIG } from "./config.js"
 
 function truncarTexto(texto, maxLength) {
-    if (!texto || texto.length <= maxLength) return texto;
+    if (!texto || texto.length <= maxLength) return texto
 
-    const truncado = texto.substring(0, maxLength);
-    const ultimoEspacio = truncado.lastIndexOf(" ");
+    const truncado = texto.substring(0, maxLength)
+    const ultimoEspacio = truncado.lastIndexOf(" ")
 
     return ultimoEspacio > 0
         ? truncado.substring(0, ultimoEspacio) + "..."
-        : truncado + "...";
+        : truncado + "..."
 }
 
 export function renderizarIntro(templateHTML) {
-    return templateHTML;
+    return templateHTML
 }
 
 export function renderizarCategoria(
@@ -20,31 +20,31 @@ export function renderizarCategoria(
     categoriaNombre,
     config = {}
 ) {
-    let html = templateHTML;
+    let html = templateHTML
 
     html = html.replace(
         /<h1 class="title">.*?<\/h1>/,
         `<h1 class="title">${categoriaNombre}</h1>`
-    );
+    )
 
     if (config.hora) {
         html = html.replace(
             /<span>17:39<\/span>/g,
             `<span>${config.hora}</span>`
-        );
+        )
     }
     if (config.temperatura) {
         html = html.replace(
             /<span>31°<\/span>/g,
             `<span>${config.temperatura}°</span>`
-        );
+        )
     }
 
-    return html;
+    return html
 }
 
 export function renderizarDestacados(templateHTML, productos, config = {}) {
-    let html = templateHTML;
+    let html = templateHTML
 
     const cardsHTML = productos
         .slice(0, 3)
@@ -66,27 +66,27 @@ export function renderizarDestacados(templateHTML, productos, config = {}) {
         </article>
     `
         )
-        .join("");
+        .join("")
 
     html = html.replace(
         /<div class="cards">[\s\S]*?<\/div>\s*<\/main>/,
         `<div class="cards">${cardsHTML}</div></main>`
-    );
+    )
 
     if (config.hora) {
         html = html.replace(
             /<span>17:39<\/span>/g,
             `<span>${config.hora}</span>`
-        );
+        )
     }
     if (config.temperatura) {
         html = html.replace(
             /<span>31°<\/span>/g,
             `<span>${config.temperatura}°</span>`
-        );
+        )
     }
 
-    return html;
+    return html
 }
 
 export function renderizarProductos(
@@ -95,16 +95,16 @@ export function renderizarProductos(
     paginaInicial = 0,
     config = {}
 ) {
-    let html = templateHTML;
+    let html = templateHTML
 
-    const productosPorPagina = TEMPLATE_CONFIG.PRODUCTOS_POR_PAGINA;
-    const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+    const productosPorPagina = TEMPLATE_CONFIG.PRODUCTOS_POR_PAGINA
+    const totalPaginas = Math.ceil(productos.length / productosPorPagina)
 
-    const inicio = paginaInicial * productosPorPagina;
-    const fin = Math.min(inicio + productosPorPagina, productos.length);
-    const productosVisibles = productos.slice(inicio, fin);
+    const inicio = paginaInicial * productosPorPagina
+    const fin = Math.min(inicio + productosPorPagina, productos.length)
+    const productosVisibles = productos.slice(inicio, fin)
 
-    const productoDestacado = productosVisibles[0] || productos[0];
+    const productoDestacado = productosVisibles[0] || productos[0]
 
     html = html.replace(
         /<figure class="photo">[\s\S]*?<\/figure>/,
@@ -113,11 +113,11 @@ export function renderizarProductos(
             productoDestacado.nombre || ""
         }" class="producto-img-destacada" />
         </figure>`
-    );
+    )
 
     const listaHTML = productosVisibles
         .map((producto, indexLocal) => {
-            const indexGlobal = inicio + indexLocal;
+            const indexGlobal = inicio + indexLocal
             return `
         <div class="item ${
             indexLocal === 0 ? "active" : ""
@@ -135,9 +135,9 @@ export function renderizarProductos(
                 producto.precio ? producto.precio.toLocaleString("es-CL") : ""
             }</span>
         </div>
-    `;
+    `
         })
-        .join("");
+        .join("")
 
     html = html.replace(
         /<div class="menu-list">[\s\S]*?<\/div>\s*<\/section>/,
@@ -147,27 +147,7 @@ export function renderizarProductos(
             data-total-paginas="${totalPaginas}"
             data-pagina-actual="${paginaInicial}"
         >${listaHTML}</div></section>`
-    );
+    )
 
-    if (config.hora) {
-        html = html.replace(
-            /<span>17:39<\/span>/g,
-            `<span>${config.hora}</span>`
-        );
-    }
-    if (config.temperatura) {
-        html = html.replace(
-            /<span>31°<\/span>/g,
-            `<span>${config.temperatura}°</span>`
-        );
-    }
-
-    if (config.eyebrow) {
-        html = html.replace(
-            /<div class="eyebrow">.*?<\/div>/,
-            `<div class="eyebrow">${config.eyebrow}</div>`
-        );
-    }
-
-    return html;
+    return html
 }
