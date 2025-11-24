@@ -22,10 +22,20 @@ export function renderizarCategoria(
 ) {
     let html = templateHTML
 
+    const catKey = categoriaNombre.toLowerCase().replace(/\s+/g, "")
+    console.log("catKey:", catKey)
+
+    html = html.replace(
+        /<div class="screen category"/,
+        `<div class="screen category" style="background-image: url('../../img/Pantalla3/fondo-${catKey}.jpg')"`
+    )
+
     html = html.replace(
         /<h1 class="title">.*?<\/h1>/,
         `<h1 class="title">${categoriaNombre}</h1>`
     )
+
+    console.log("categoriaNombre:", categoriaNombre)
 
     if (config.hora) {
         html = html.replace(

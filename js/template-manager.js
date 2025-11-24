@@ -1,29 +1,29 @@
-import { logUser } from "../api/auth-service.js";
-import { obtenerMenuQR } from "../api/menu-service.js";
-import { getCurrentWeather } from "../api/weather.js";
-import { getQueryStrings } from "./utils/getQueryStrings.js";
-import { TEMPLATE_CONFIG } from "./utils/config.js";
-import { obtenerConfigActual } from "./utils/time.js";
-import { cargarTemplate, cargarTemplates } from "./utils/template-loader.js";
+import { logUser } from "../api/auth-service.js"
+import { obtenerMenuQR } from "../api/menu-service.js"
+import { getCurrentWeather } from "../api/weather.js"
+import { getQueryStrings } from "./utils/getQueryStrings.js"
+import { TEMPLATE_CONFIG } from "./utils/config.js"
+import { obtenerConfigActual } from "./utils/time.js"
+import { cargarTemplate, cargarTemplates } from "./utils/template-loader.js"
 import {
     renderizarIntro,
     renderizarCategoria,
     renderizarDestacados,
     renderizarProductos,
-} from "./utils/renderers.js";
-import { iniciarRotacionFrames } from "./utils/carousel.js";
+} from "./utils/renderers.js"
+import { iniciarRotacionFrames } from "./utils/carousel.js"
 
-const $ = window.$;
-let data = {};
+const $ = window.$
+let data = {}
 
 export function generarFramesProductosPaginados(
     template,
     productos,
     config = {}
 ) {
-    const productosPorPagina = TEMPLATE_CONFIG.PRODUCTOS_POR_PAGINA;
-    const totalPaginas = Math.ceil(productos.length / productosPorPagina);
-    const frames = [];
+    const productosPorPagina = TEMPLATE_CONFIG.PRODUCTOS_POR_PAGINA
+    const totalPaginas = Math.ceil(productos.length / productosPorPagina)
+    const frames = []
 
     for (let pagina = 0; pagina < totalPaginas; pagina++) {
         frames.push({
@@ -34,133 +34,133 @@ export function generarFramesProductosPaginados(
                 paginaInicial: pagina,
             },
             config: config,
-        });
+        })
     }
 
-    return frames;
+    return frames
 }
 
 export async function obtenerDatosMenu() {
     try {
-        const token = localStorage.getItem("jwt_token");
-        const { mid = 7, sid = 61291 } = getQueryStrings();
-        const menuResponse = await obtenerMenuQR(mid, sid, token);
-        return menuResponse;
+        const token = localStorage.getItem("jwt_token")
+        const { mid = 7, sid = 61291 } = getQueryStrings()
+        const menuResponse = await obtenerMenuQR(mid, sid, token)
+        return menuResponse
     } catch (error) {
-        console.error("Error al obtener el menú:", error);
-        return false;
+        console.error("Error al obtener el menú:", error)
+        return false
     }
 }
 
 export function actualizarHora(weatherData) {
-    const $horaElemento = $(".time-badge #hora");
-    const $temperaturaElemento = $(".time-badge #temperatura");
+    const $horaElemento = $(".time-badge #hora")
+    const $temperaturaElemento = $(".time-badge #temperatura")
     if (!$horaElemento.length) {
-        console.warn("El elemento #hora no se encontró en el DOM.");
-        return;
+        console.warn("El elemento #hora no se encontró en el DOM.")
+        return
     }
 
     const horaActual = new Date().toLocaleTimeString("es-CL", {
         hour: "2-digit",
         minute: "2-digit",
         hour12: false,
-    });
+    })
 
     if (weatherData && weatherData.current) {
-        const temperatura = Math.round(weatherData.current.temperature);
-        $temperaturaElemento.text(`${temperatura}°`);
+        const temperatura = Math.round(weatherData.current.temperature)
+        $temperaturaElemento.text(`${temperatura}°`)
     }
 
-    $horaElemento.text(horaActual);
+    $horaElemento.text(horaActual)
 }
 
 export async function inicializarCarruselFrames(frames) {
-    const $container = $("#app-container");
+    const $container = $("#app-container")
 
     if (!$container.length) {
-        console.error("No se encontró #app-container");
-        return;
+        console.error("No se encontró #app-container")
+        return
     }
 
-    const templateNames = [...new Set(frames.map((f) => f.template))];
-    const templates = await cargarTemplates(templateNames);
+    const templateNames = [...new Set(frames.map((f) => f.template))]
+    const templates = await cargarTemplates(templateNames)
 
     const framesHTML = frames.map((frame, index) => {
-        let html = "";
+        let html = ""
 
         switch (frame.tipo) {
             case "intro":
-                html = renderizarIntro(templates[frame.template]);
-                break;
+                html = renderizarIntro(templates[frame.template])
+                break
             case "categoria":
                 html = renderizarCategoria(
                     templates[frame.template],
                     frame.data?.nombre || "Categoría",
                     frame.config || {}
-                );
-                break;
+                )
+                break
             case "destacados":
                 html = renderizarDestacados(
                     templates[frame.template],
                     frame.data?.productos || [],
                     frame.config || {}
-                );
-                break;
+                )
+                break
             case "productos":
                 html = renderizarProductos(
                     templates[frame.template],
                     frame.data?.productos || [],
                     frame.data?.paginaInicial || 0,
                     frame.config || {}
-                );
-                break;
+                )
+                break
             default:
-                console.warn(`Tipo de frame desconocido: ${frame.tipo}`);
+                console.warn(`Tipo de frame desconocido: ${frame.tipo}`)
         }
 
-        return html;
-    });
+        return html
+    })
 
-    $container.html(framesHTML.join(""));
+    $container.html(framesHTML.join(""))
 
-    iniciarRotacionFrames();
+    iniciarRotacionFrames()
 }
 
 export async function main(categoriasAMostrar = null) {
     try {
-        await logUser();
-        let weatherData = await getCurrentWeather();
+        await logUser()
+        let weatherData = await getCurrentWeather()
 
         const transformarCategoria = (categoria) => {
             switch (categoria) {
                 case "Desayuno y Tostadas":
-                    return "Desayunos y Tostadas";
+                    return "Desayunos y Tostadas"
                 case "Pasteleria":
-                    return "Pastelería";
+                    return "Pastelería"
                 case "Cafeteria":
-                    return "Cafetería";
+                    return "Cafetería"
                 default:
-                    return categoria;
+                    return categoria
             }
-        };
-
-        if (categoriasAMostrar) {
-            categoriasAMostrar = categoriasAMostrar.map(transformarCategoria);
         }
 
-        let menuData = await obtenerDatosMenu();
-        let platos;
+        if (categoriasAMostrar) {
+            categoriasAMostrar = categoriasAMostrar.map(transformarCategoria)
+        }
+
+        let menuData = await obtenerDatosMenu()
+        let platos
 
         if (!menuData || !menuData.productos) {
             console.warn(
                 "No se pudo obtener el menú de la API. Cargando datos locales..."
-            );
+            )
 
             try {
-                const response = await fetch("./data/platos.json");
-                const datosLocales = await response.json();
+                const response = await fetch("./data/platos.json")
+                const datosLocales = await response.json()
 
-                platos = [];
+                platos = []
                 Object.entries(datosLocales).forEach(
                     ([categoria, productos]) => {
                         productos.forEach((producto) => {
@@ -171,28 +171,28 @@ export async function main(categoriasAMostrar = null) {
                                 precio: producto.precio,
                                 imagen_url: producto.img,
                                 id_producto: producto.id || Math.random(),
-                            });
-                        });
+                            })
+                        })
                     }
-                );
+                )
             } catch (errorLocal) {
                 throw new Error(
                     "No se pudo cargar el menú desde la API ni desde el archivo local"
-                );
+                )
             }
         } else {
             platos = menuData.productos.map((producto) => ({
                 ...producto,
                 categoria: transformarCategoria(producto.categoria),
-            }));
+            }))
         }
 
-        const list = {};
+        const list = {}
         platos.forEach((plato) => {
-            const categoria = plato.categoria;
+            const categoria = plato.categoria
 
             if (!list[categoria]) {
-                list[categoria] = [];
+                list[categoria] = []
             }
 
             list[categoria].push({
@@ -201,20 +201,20 @@ export async function main(categoriasAMostrar = null) {
                 precio: plato.precio,
                 img: plato.imagen_url,
                 id: plato.id_producto,
-            });
-        });
+            })
+        })
 
-        const config = obtenerConfigActual();
-        let categorias = categoriasAMostrar || Object.keys(list);
-        const frames = [];
+        const config = obtenerConfigActual()
+        let categorias = categoriasAMostrar || Object.keys(list)
+        const frames = []
 
         frames.push({
             tipo: "intro",
             template: "intro",
-        });
+        })
 
         categorias.forEach((categoria) => {
-            const productosCategoria = list[categoria] || [];
+            const productosCategoria = list[categoria] || []
 
             if (productosCategoria.length > 0) {
                 frames.push({
@@ -222,7 +222,7 @@ export async function main(categoriasAMostrar = null) {
                     template: "categoria",
                     data: { nombre: categoria },
                     config: config,
-                });
+                })
 
                 if (productosCategoria.length >= 3) {
                     frames.push({
@@ -232,7 +232,7 @@ export async function main(categoriasAMostrar = null) {
                             productos: productosCategoria.slice(0, 3),
                         },
                         config: config,
-                    });
+                    })
                 }
 
                 frames.push(
@@ -244,22 +244,22 @@ export async function main(categoriasAMostrar = null) {
                             eyebrow: `${categoria}`,
                         }
                     )
-                );
+                )
             }
-        });
+        })
 
-        await inicializarCarruselFrames(frames);
+        await inicializarCarruselFrames(frames)
 
         setInterval(async () => {
-            weatherData = await getCurrentWeather();
-        }, 600000);
+            weatherData = await getCurrentWeather()
+        }, 600000)
 
         setInterval(() => {
-            actualizarHora(weatherData);
-        }, 1000);
+            actualizarHora(weatherData)
+        }, 1000)
     } catch (error) {
-        console.error("Error al inicializar la cartelería:", error);
-        throw error;
+        console.error("Error al inicializar la cartelería:", error)
+        throw error
     }
 }
 
@@ -268,4 +268,4 @@ export {
     obtenerConfigActual,
     cargarTemplate,
     cargarTemplates,
-};
+}
