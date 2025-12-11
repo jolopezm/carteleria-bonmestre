@@ -14,6 +14,7 @@ import {
     iniciarRotacionProductos,
     iniciarRotacionFrames,
 } from "./carousel.js"
+import { mostrarMensaje } from "./mensaje.js"
 
 export {
     obtenerHoraActual,
@@ -31,4 +32,5 @@ export {
     reanudarCarruselFrames,
     iniciarRotacionProductos,
     iniciarRotacionFrames,
+    mostrarMensaje,
 }

@@ -27,8 +27,8 @@ const WEATHER_PARAMS = {
 }
 
 const AUTH_DATA = {
-    USERNAME: "admin",
-    PASSWORD: "tecnoactive",
+    usuario: "admin",
+    password: "tecnoactive",
 }
 
 export { CONFIG, PATHS, API_URLS, WEATHER_PARAMS, AUTH_DATA }

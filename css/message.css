@@ -1,0 +1,18 @@
+.message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px 30px;
+    border-radius: 8px;
+    z-index: 1000;
+    max-width: 80%;
+    text-align: center;
+}
+
+.message-content {
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+}

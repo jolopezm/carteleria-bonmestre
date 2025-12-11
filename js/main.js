@@ -8,6 +8,7 @@ import {
     renderizarDestacados,
     renderizarProductos,
     iniciarRotacionFrames,
+    mostrarMensaje,
 } from "./utils/index.js"
 import { CONFIG } from "./constants.js"
 
@@ -40,8 +41,7 @@ async function obtenerDatosMenu() {
         const menuResponse = await obtenerMenuQR(mid, sid, token)
         return menuResponse
     } catch (error) {
-        console.error("Error al obtener el menú:", error)
-        return false
+        throw error
     }
 }
 
@@ -251,8 +251,7 @@ async function main(categoriasAMostrar = null) {
             actualizarHora(weatherData)
         }, 1000)
     } catch (error) {
-        console.error("Error al inicializar la cartelería:", error)
-        throw error
+        mostrarMensaje(error)
     }
 }
 
