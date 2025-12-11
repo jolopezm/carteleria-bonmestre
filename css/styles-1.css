@@ -535,7 +535,7 @@ body {
 .price-tag {
     font-family: "AvenirNextLTPro", sans-serif;
     font-weight: 600;
-    font-size: 22px;
+    font-size: 44px;
     background: #e2dfe2;
     color: var(--ink);
     padding: 8px 22px;

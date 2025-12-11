@@ -27,7 +27,6 @@ function renderizarCategoria(templateHTML, categoriaNombre, config = {}) {
     let html = templateHTML
 
     const catKey = normalizarKey(categoriaNombre)
-    console.log("Categoria Key:", catKey)
 
     html = html.replace(
         /<div class="screen category"/,
