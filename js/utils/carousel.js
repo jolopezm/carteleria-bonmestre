@@ -1,33 +1,29 @@
-import { TEMPLATE_CONFIG } from "./config.js"
-import { obtenerConfigActual } from "../utils/time.js"
+import { CONFIG } from "../constants.js"
 
 const $ = window.$
 
 let intervalosActivos = []
 let intervaloFrames = null
 
-export function limpiarIntervalos() {
+function limpiarIntervalos() {
     intervalosActivos.forEach((intervalo) => clearInterval(intervalo))
     intervalosActivos = []
 }
 
-export function pausarCarruselFrames() {
+function pausarCarruselFrames() {
     if (intervaloFrames) {
         clearInterval(intervaloFrames)
         intervaloFrames = null
     }
 }
 
-export function reanudarCarruselFrames(callback) {
+function reanudarCarruselFrames(callback) {
     if (!intervaloFrames) {
-        intervaloFrames = setInterval(
-            callback,
-            TEMPLATE_CONFIG.INTERVALO_FRAMES
-        )
+        intervaloFrames = setInterval(callback, CONFIG.INTERVALO_FRAMES)
     }
 }
 
-export function iniciarRotacionProductos($frame, onComplete) {
+function iniciarRotacionProductos($frame, onComplete) {
     const $menuList = $frame.find(".menu-list")
     const $items = $menuList.find(".item")
     const $imgDestacada = $frame.find(".producto-img-destacada")
@@ -54,15 +50,12 @@ export function iniciarRotacionProductos($frame, onComplete) {
 
         const $itemSiguiente = $items.eq(indiceActual)
 
-        $imgDestacada.fadeOut(
-            TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO,
-            function () {
-                const nuevaImg = $itemSiguiente.data("producto-img")
-                $(this).attr("src", nuevaImg)
-                $itemSiguiente.addClass("active")
-                $(this).fadeIn(TEMPLATE_CONFIG.DURACION_FADE_PRODUCTO)
-            }
-        )
+        $imgDestacada.fadeOut(CONFIG.DURACION_FADE_PRODUCTO, function () {
+            const nuevaImg = $itemSiguiente.data("producto-img")
+            $(this).attr("src", nuevaImg)
+            $itemSiguiente.addClass("active")
+            $(this).fadeIn(CONFIG.DURACION_FADE_PRODUCTO)
+        })
 
         if (productosIterados >= $items.length) {
             clearInterval(intervalo)
@@ -72,12 +65,12 @@ export function iniciarRotacionProductos($frame, onComplete) {
                 setTimeout(onComplete, 500)
             }
         }
-    }, TEMPLATE_CONFIG.INTERVALO_PRODUCTOS)
+    }, CONFIG.INTERVALO_PRODUCTOS)
 
     intervalosActivos.push(intervalo)
 }
 
-export function iniciarRotacionFrames() {
+function iniciarRotacionFrames() {
     const $frames = $(".frame")
     let frameActual = 0
     let ciclosCompletados = 0
@@ -86,9 +79,7 @@ export function iniciarRotacionFrames() {
         const $frameActual = $frames.eq(frameActual)
         limpiarIntervalos()
 
-        $frameActual
-            .removeClass("is-active")
-            .slideUp(TEMPLATE_CONFIG.DURACION_FADE)
+        $frameActual.removeClass("is-active").slideUp(CONFIG.DURACION_FADE)
 
         frameActual = (frameActual + 1) % $frames.length
 
@@ -100,7 +91,7 @@ export function iniciarRotacionFrames() {
 
         $nuevoFrame
             .addClass("is-active")
-            .slideDown(TEMPLATE_CONFIG.DURACION_FADE, function () {
+            .slideDown(CONFIG.DURACION_FADE, function () {
                 if ($nuevoFrame.find(".menu-list").length) {
                     pausarCarruselFrames()
 
@@ -112,19 +103,21 @@ export function iniciarRotacionFrames() {
     }
 
     const $primerFrame = $frames.eq(frameActual)
-    $primerFrame.addClass("is-active").fadeIn(TEMPLATE_CONFIG.DURACION_FADE)
+    $primerFrame.addClass("is-active").fadeIn(CONFIG.DURACION_FADE)
 
     if ($primerFrame.find(".menu-list").length) {
         iniciarRotacionProductos($primerFrame, function () {
-            intervaloFrames = setInterval(
-                avanzarFrame,
-                TEMPLATE_CONFIG.INTERVALO_FRAMES
-            )
+            intervaloFrames = setInterval(avanzarFrame, CONFIG.INTERVALO_FRAMES)
         })
     } else {
-        intervaloFrames = setInterval(
-            avanzarFrame,
-            TEMPLATE_CONFIG.INTERVALO_FRAMES
-        )
+        intervaloFrames = setInterval(avanzarFrame, CONFIG.INTERVALO_FRAMES)
     }
+}
+
+export {
+    limpiarIntervalos,
+    pausarCarruselFrames,
+    reanudarCarruselFrames,
+    iniciarRotacionProductos,
+    iniciarRotacionFrames,
 }

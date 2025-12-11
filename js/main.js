@@ -1,27 +1,20 @@
-import { logUser } from "../api/auth-service.js"
-import { obtenerMenuQR } from "../api/menu-service.js"
-import { getCurrentWeather } from "../api/weather.js"
-import { getQueryStrings } from "./utils/getQueryStrings.js"
-import { TEMPLATE_CONFIG } from "./utils/config.js"
-import { obtenerConfigActual } from "./utils/time.js"
-import { cargarTemplate, cargarTemplates } from "./utils/template-loader.js"
+import { obtenerMenuQR, logUser, getCurrentWeather } from "./api/index.js"
 import {
+    obtenerConfigActual,
+    getQueryStrings,
+    cargarTemplates,
     renderizarIntro,
     renderizarCategoria,
     renderizarDestacados,
     renderizarProductos,
-} from "./utils/renderers.js"
-import { iniciarRotacionFrames } from "./utils/carousel.js"
+    iniciarRotacionFrames,
+} from "./utils/index.js"
+import { CONFIG } from "./constants.js"
 
 const $ = window.$
-let data = {}
 
-export function generarFramesProductosPaginados(
-    template,
-    productos,
-    config = {}
-) {
-    const productosPorPagina = TEMPLATE_CONFIG.PRODUCTOS_POR_PAGINA
+function generarFramesProductosPaginados(template, productos, config = {}) {
+    const productosPorPagina = CONFIG.PRODUCTOS_POR_PAGINA
     const totalPaginas = Math.ceil(productos.length / productosPorPagina)
     const frames = []
 
@@ -40,7 +33,7 @@ export function generarFramesProductosPaginados(
     return frames
 }
 
-export async function obtenerDatosMenu() {
+async function obtenerDatosMenu() {
     try {
         const token = localStorage.getItem("jwt_token")
         const { mid = 7, sid = 61291 } = getQueryStrings()
@@ -52,7 +45,7 @@ export async function obtenerDatosMenu() {
     }
 }
 
-export function actualizarHora(weatherData) {
+function actualizarHora(weatherData) {
     const $horaElemento = $(".time-badge #hora")
     const $temperaturaElemento = $(".time-badge #temperatura")
     if (!$horaElemento.length) {
@@ -74,7 +67,7 @@ export function actualizarHora(weatherData) {
     $horaElemento.text(horaActual)
 }
 
-export async function inicializarCarruselFrames(frames) {
+async function inicializarCarruselFrames(frames) {
     const $container = $("#app-container")
 
     if (!$container.length) {
@@ -126,7 +119,7 @@ export async function inicializarCarruselFrames(frames) {
     iniciarRotacionFrames()
 }
 
-export async function main(categoriasAMostrar = null) {
+async function main(categoriasAMostrar = null) {
     try {
         await logUser()
         let weatherData = await getCurrentWeather()
@@ -264,8 +257,9 @@ export async function main(categoriasAMostrar = null) {
 }
 
 export {
-    inicializarCarruselFrames as default,
-    obtenerConfigActual,
-    cargarTemplate,
-    cargarTemplates,
+    obtenerDatosMenu,
+    generarFramesProductosPaginados,
+    main,
+    actualizarHora,
+    inicializarCarruselFrames,
 }

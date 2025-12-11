@@ -1,4 +1,4 @@
-export async function obtenerMenuQR(marcaId, sucursalId, token) {
+async function obtenerMenuQR(marcaId, sucursalId, token) {
     const response = await fetch(`https://clientes.tecnoactive.cl/cms_content/api/menu_qr.php?marca_id=${marcaId}&sucursal=${sucursalId}`, {
         method: "GET",
         headers: {
@@ -14,3 +14,5 @@ export async function obtenerMenuQR(marcaId, sucursalId, token) {
         throw new Error(data.error)
     }
 }
+
+export { obtenerMenuQR }

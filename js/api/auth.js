@@ -17,18 +17,25 @@ function saveToken(token, user) {
 
 async function authUser() {
     try {
-        const response = await fetch("https://clientes.tecnoactive.cl/cms_content/api/auth/login.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(loginData),
-        })
+        const response = await fetch(
+            "https://clientes.tecnoactive.cl/cms_content/api/auth/login.php",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(loginData),
+            }
+        )
 
         const data = await response.json()
 
         if (data.success) {
-            return { success: true, mensaje: "Autenticación exitosa", datos: { token: data.token, user: data.user } }
+            return {
+                success: true,
+                mensaje: "Autenticación exitosa",
+                datos: { token: data.token, user: data.user },
+            }
         } else {
             return { success: false, mensaje: data.error }
         }
@@ -38,7 +45,7 @@ async function authUser() {
     }
 }
 
-export async function logUser() {
+async function logUser() {
     cleanToken()
     const result = await authUser()
 
@@ -47,3 +54,5 @@ export async function logUser() {
     }
     return result.mensaje
 }
+
+export { logUser }

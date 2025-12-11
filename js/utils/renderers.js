@@ -1,4 +1,4 @@
-import { TEMPLATE_CONFIG } from "./config.js"
+import { CONFIG } from "../constants.js"
 
 function truncarTexto(texto, maxLength) {
     if (!texto || texto.length <= maxLength) return texto
@@ -11,15 +11,11 @@ function truncarTexto(texto, maxLength) {
         : truncado + "..."
 }
 
-export function renderizarIntro(templateHTML) {
+function renderizarIntro(templateHTML) {
     return templateHTML
 }
 
-export function renderizarCategoria(
-    templateHTML,
-    categoriaNombre,
-    config = {}
-) {
+function renderizarCategoria(templateHTML, categoriaNombre, config = {}) {
     let html = templateHTML
 
     const catKey = categoriaNombre.toLowerCase().replace(/\s+/g, "")
@@ -53,7 +49,7 @@ export function renderizarCategoria(
     return html
 }
 
-export function renderizarDestacados(templateHTML, productos, config = {}) {
+function renderizarDestacados(templateHTML, productos, config = {}) {
     let html = templateHTML
 
     const cardsHTML = productos
@@ -99,7 +95,7 @@ export function renderizarDestacados(templateHTML, productos, config = {}) {
     return html
 }
 
-export function renderizarProductos(
+function renderizarProductos(
     templateHTML,
     productos,
     paginaInicial = 0,
@@ -107,7 +103,7 @@ export function renderizarProductos(
 ) {
     let html = templateHTML
 
-    const productosPorPagina = TEMPLATE_CONFIG.PRODUCTOS_POR_PAGINA
+    const productosPorPagina = CONFIG.PRODUCTOS_POR_PAGINA
     const totalPaginas = Math.ceil(productos.length / productosPorPagina)
 
     const inicio = paginaInicial * productosPorPagina
@@ -160,4 +156,11 @@ export function renderizarProductos(
     )
 
     return html
+}
+
+export {
+    renderizarIntro,
+    renderizarCategoria,
+    renderizarDestacados,
+    renderizarProductos,
 }
