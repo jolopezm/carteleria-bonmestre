@@ -10,9 +10,8 @@ async function getCurrentWeather() {
         units: WEATHER_PARAMS.UNITS,
         key: WEATHER_PARAMS.API_KEY,
     })
-    console.log("Fetching weather data with params:", params.toString())
 
-    return fetch(`${API_URLS.WEATHER_API}?${params.toString()}`, {
+    return fetch(`${API_URLS.WEATHER}?${params.toString()}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -10,7 +10,6 @@ async function cargarTemplate(templateName) {
         }
         return await response.text()
     } catch (error) {
-        console.error(`Error cargando template ${templateName}:`, error)
         throw error
     }
 }

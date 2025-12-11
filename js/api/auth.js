@@ -1,7 +1,4 @@
-const loginData = {
-    usuario: "admin",
-    password: "tecnoactive",
-}
+import { AUTH_DATA, API_URLS } from "../constants.js"
 
 function cleanToken() {
     if (localStorage.getItem("jwt_token")) {
@@ -17,16 +14,13 @@ function saveToken(token, user) {
 
 async function authUser() {
     try {
-        const response = await fetch(
-            "https://clientes.tecnoactive.cl/cms_content/api/auth/login.php",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(loginData),
-            }
-        )
+        const response = await fetch(`${API_URLS.AUTH}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(AUTH_DATA),
+        })
 
         const data = await response.json()
 

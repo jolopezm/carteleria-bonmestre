@@ -4,7 +4,7 @@ const CONFIG = {
     DURACION_FADE: 600,
     INTERVALO_PRODUCTOS: 5000,
     DURACION_FADE_PRODUCTO: 400,
-    PRODUCTOS_POR_PAGINA: 6, 
+    PRODUCTOS_POR_PAGINA: 6,
 }
 
 const PATHS = {
@@ -12,7 +12,8 @@ const PATHS = {
 }
 
 const API_URLS = {
-    WEATHER_API: "https://www.meteosource.com/api/v1/free/point",
+    WEATHER: "https://www.meteosource.com/api/v1/free/point",
+    AUTH: "https://clientes.tecnoactive.cl/cms_content/api/auth/login.php",
 }
 
 const WEATHER_PARAMS = {
@@ -25,4 +26,9 @@ const WEATHER_PARAMS = {
     API_KEY: "9v45z6vkw9qbiil8fpre1r08pui2trrtkbw39m61",
 }
 
-export { CONFIG, PATHS, API_URLS, WEATHER_PARAMS }
+const AUTH_DATA = {
+    USERNAME: "admin",
+    PASSWORD: "tecnoactive",
+}
+
+export { CONFIG, PATHS, API_URLS, WEATHER_PARAMS, AUTH_DATA }

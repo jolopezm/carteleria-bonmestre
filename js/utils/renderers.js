@@ -15,11 +15,19 @@ function renderizarIntro(templateHTML) {
     return templateHTML
 }
 
+function normalizarKey(key) {
+    return key
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, "")
+}
+
 function renderizarCategoria(templateHTML, categoriaNombre, config = {}) {
     let html = templateHTML
 
-    const catKey = categoriaNombre.toLowerCase().replace(/\s+/g, "")
-    console.log("catKey:", catKey)
+    const catKey = normalizarKey(categoriaNombre)
+    console.log("Categoria Key:", catKey)
 
     html = html.replace(
         /<div class="screen category"/,
@@ -30,8 +38,6 @@ function renderizarCategoria(templateHTML, categoriaNombre, config = {}) {
         /<h1 class="title">.*?<\/h1>/,
         `<h1 class="title">${categoriaNombre}</h1>`
     )
-
-    console.log("categoriaNombre:", categoriaNombre)
 
     if (config.hora) {
         html = html.replace(
