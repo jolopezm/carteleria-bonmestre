@@ -30,7 +30,7 @@ function renderizarCategoria(templateHTML, categoriaNombre, config = {}) {
 
     html = html.replace(
         /<div class="screen category"/,
-        `<div class="screen category" style="background-image: url('../../img/Pantalla3/fondo-${catKey}.jpg')"`
+        `<div class="screen category" style="background-image: url('../../img/Pantalla3/fondo-${catKey}.webp')"`
     )
 
     html = html.replace(
